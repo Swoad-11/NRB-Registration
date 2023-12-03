@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Login from "../../components/Login/Login";
 import Signup from "../../components/Signup/Signup";
+import img1 from "../../assets/log.svg";
+import img2 from "../../assets/register.svg";
 
 const LandingPage = () => {
   const [isSignUpMode, setSignUpMode] = useState(false);
@@ -33,8 +35,7 @@ const LandingPage = () => {
               Sign up
             </button>
           </div>
-          {/* Replace the image source with your actual image path */}
-          <img src="img/log.svg" className="image" alt="" />
+          <img src={img1} className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -44,11 +45,10 @@ const LandingPage = () => {
               laboriosam ad deleniti.
             </p>
             <button className="btn transparent" onClick={handleSignInClick}>
-              Sign in
+              Login in
             </button>
           </div>
-          {/* Replace the image source with your actual image path */}
-          <img src="img/register.svg" className="image" alt="" />
+          <img src={img2} className="image" alt="" />
         </div>
       </div>
     </div>

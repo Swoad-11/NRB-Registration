@@ -1,3 +1,5 @@
+import SocialMedia from "../SocialMedia/SocialMedia";
+
 const Login = () => {
   return (
     <div>
@@ -13,7 +15,7 @@ const Login = () => {
         </div>
         <input type="submit" value="Login" className="btn solid" />
         <p className="social-text">Or Sign in with social platforms</p>
-        {/* Add social media links here */}
+        <SocialMedia />
       </form>
     </div>
   );
