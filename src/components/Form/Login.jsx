@@ -1,13 +1,15 @@
-import FormInput from "../FormInput/FormInput";
+import FormInput from "./FormInput";
 import SocialMedia from "../SocialMedia/SocialMedia";
+import { FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Login = () => {
   return (
     <div>
       <form action="#" className="sign-in-form">
         <h2 className="text-2xl font-semibold">Log in</h2>
-        <FormInput fieldName={"Email Address"} />
-        <FormInput fieldName={"Password"} />
+        <FormInput fieldName={"Email Address"} icon={<MdEmail />} />
+        <FormInput fieldName={"Password"} icon={<FaLock />} />
         <button
           type="button"
           className="text-white bg-purple-700 hover:bg-purple-800
@@ -15,7 +17,7 @@ const Login = () => {
         >
           Login
         </button>
-        <SocialMedia />
+        <SocialMedia value={"Login"} />
       </form>
     </div>
   );

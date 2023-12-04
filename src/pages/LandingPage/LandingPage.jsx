@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Login from "../../components/Login/Login";
-import Signup from "../../components/Signup/Signup";
 import img1 from "../../assets/log.svg";
 import img2 from "../../assets/register.svg";
+import Signup from "../../components/Form/Signup";
+import Login from "../../components/Form/Login";
 
 const LandingPage = () => {
   const [isSignUpMode, setSignUpMode] = useState(false);
