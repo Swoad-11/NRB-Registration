@@ -3,20 +3,23 @@ import { TiSocialLinkedin } from "react-icons/ti";
 
 const SocialMedia = () => {
   return (
-    <div className="social-media">
-      <a href="#" className="social-icon">
-        <FaFacebookF />
-      </a>
-      <a href="#" className="social-icon">
-        <FaXTwitter />
-      </a>
-      <a href="#" className="social-icon">
-        <FaGoogle />
-      </a>
-      <a href="#" className="social-icon">
-        <TiSocialLinkedin />
-      </a>
-    </div>
+    <>
+      <p className="font-base mb-2 mt-4">Or Sign up with social platforms</p>
+      <div className="flex justify-center">
+        <a href="#" className="social-icon">
+          <FaFacebookF />
+        </a>
+        <a href="#" className="social-icon">
+          <FaXTwitter />
+        </a>
+        <a href="#" className="social-icon">
+          <FaGoogle />
+        </a>
+        <a href="#" className="social-icon">
+          <TiSocialLinkedin />
+        </a>
+      </div>
+    </>
   );
 };
 
