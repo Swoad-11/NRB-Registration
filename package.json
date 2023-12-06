@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@quillforms/react-renderer-utils": "^5.9.1",
+    "@quillforms/renderer-core": "^5.7.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",

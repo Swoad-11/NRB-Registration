@@ -1,4 +1,3 @@
-// FormPersonal.jsx
 import { useState } from "react";
 import FormInput from "./FormInput";
 
@@ -26,6 +25,9 @@ const FormPersonal = ({ onNext }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add validation logic if needed
+
+    // Store form data in sessionStorage
+    sessionStorage.setItem("formDataPersonal", JSON.stringify(formData));
 
     // Call the onNext function with the form data to save and proceed to the next step
     onNext(formData);

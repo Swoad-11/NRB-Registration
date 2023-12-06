@@ -1,5 +1,4 @@
-// FormCompany.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "./FormInput";
 
 const FormCompany = ({ onPrevious, onNext, prevFormData }) => {
@@ -37,13 +36,22 @@ const FormCompany = ({ onPrevious, onNext, prevFormData }) => {
   };
 
   const handlePrevious = () => {
-    // Call onPrevious to go back to the previous step
-    onPrevious();
+    // Retrieve form data from sessionStorage
+    const formDataPersonal = sessionStorage.getItem("formDataPersonal");
+    const formDataPersonalObj = formDataPersonal
+      ? JSON.parse(formDataPersonal)
+      : {};
+
+    // Call onPrevious with the form data to go back to the previous step
+    onPrevious(formDataPersonalObj);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add validation logic if needed
+
+    // Store form data in sessionStorage
+    sessionStorage.setItem("formDataCompany", JSON.stringify(formData));
 
     // Call onNext with the form data to save and proceed to the next step
     onNext(formData);
@@ -107,7 +115,7 @@ const FormCompany = ({ onPrevious, onNext, prevFormData }) => {
         {/* Add more social media fields as needed */}
         <div className="flex justify-between">
           <button
-            type="button" // Change the type to "button"
+            type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
            font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
             onClick={handlePrevious}
