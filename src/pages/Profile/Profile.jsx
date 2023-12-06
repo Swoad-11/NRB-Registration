@@ -1,6 +1,6 @@
 const Profile = () => {
   return (
-    <div className="mx-auto mt-[46px]">
+    <div className="mx-auto">
       <h1 className="text-3xl font-bold mb-8">Client Profile</h1>
       <div className="mb-4">
         <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
