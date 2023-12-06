@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* hide scrollbar for IE, Edge and Firefox */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* hide scrollbar for chrome, safari and opera */
+*::-webkit-scrollbar {
+  display: none;
 }
 
 .container {
