@@ -1,4 +1,3 @@
-import React from "react";
 import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
@@ -7,7 +6,7 @@ registerCoreBlocks();
 
 const Info = () => {
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div className="mt-2" style={{ width: "100%", height: "100vh" }}>
       <Form
         formId="registration-form"
         formObj={{
@@ -24,7 +23,10 @@ const Info = () => {
             {
               name: "group",
               id: "personal-info",
-              label: "Personal Information",
+              attributes: {
+                label: "Personal Information",
+              },
+
               innerBlocks: [
                 {
                   name: "short-text",
@@ -85,7 +87,7 @@ const Info = () => {
                 },
 
                 {
-                  name: "short-text",
+                  name: "email",
                   id: "contact_mail",
                   attributes: {
                     required: true,
@@ -94,7 +96,7 @@ const Info = () => {
                 },
 
                 {
-                  name: "short-text",
+                  name: "number",
                   id: "phone_number",
                   attributes: {
                     required: true,
