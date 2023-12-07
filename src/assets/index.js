@@ -4,5 +4,7 @@ import reg from "./register.svg";
 import personal from "./form/personal.jpg";
 import company from "./form/company.jpg";
 import job from "./form/job.jpg";
+import ipsita from "./ipsita.png";
+import ipsita_logo from "./ipsita_logo.png";
 
-export { log, reg, personal, company, job };
+export { log, reg, ipsita, ipsita_logo, personal, company, job };

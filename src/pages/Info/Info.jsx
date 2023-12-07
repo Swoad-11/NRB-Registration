@@ -1,13 +1,16 @@
 import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
-import { company, job, personal } from "../../assets";
+import { company, ipsita_logo, job, personal } from "../../assets";
 
 registerCoreBlocks();
 
 const Info = () => {
   return (
-    <div className="mt-2" style={{ width: "100%", height: "100vh" }}>
+    <div
+      className="ml-6 md:pr-16 sm:pr-4"
+      style={{ width: "100%", height: "100vh" }}
+    >
       <Form
         formId="registration-form"
         formObj={{
@@ -258,7 +261,7 @@ const Info = () => {
                     required: true,
                     label: "Job / Project Duration",
                     choices: [
-                      { label: "Short", value: "short" },
+                      { label: "Contractual", value: "contractual" },
                       { label: "Yearly", value: "yearly" },
                       { label: "Permanent", value: "permanent" },
                     ],
@@ -276,6 +279,25 @@ const Info = () => {
               ],
             },
           ],
+
+          theme: {
+            font: "", // Specify your font
+            backgroundColor: "#ffffff", // Set your desired background color
+            backgroundImage: company, // Set the path to your background image
+            logo: {
+              type: "image",
+              src: ipsita_logo, // Set the path to your logo
+            },
+            questionsColor: "#333333", // Set your desired color for questions
+            answersColor: "#666666", // Set your desired color for answers
+            buttonsFontColor: "#ffffff", // Set your desired font color for buttons
+            buttonsBgColor: "#007bff", // Set your desired background color for buttons
+            buttonsBorderRadius: 5, // Set the border radius for buttons
+            errorsFontColor: "#ff0000", // Set your desired font color for errors
+            errorsBgColor: "#ffe0e0", // Set your desired background color for errors
+            progressBarFillColor: "#007bff", // Set your desired color for the progress bar fill
+            progressBarBgColor: "#e0e0e0", // Set your desired background color for the progress bar
+          },
         }}
         onSubmit={(data, { completeForm, setIsSubmitting }) => {
           // Handle form submission logic here
