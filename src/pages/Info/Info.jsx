@@ -27,7 +27,7 @@ const Info = () => {
                 label: "Personal Information",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/register.svg",
+                  url: "https://drive.google.com/file/d/1NKhQSkdCXi9W-lRji-LWF7aBB8l0ia2Z/view?usp=sharing",
                 },
                 layout: "float-left",
               },
@@ -101,7 +101,7 @@ const Info = () => {
                 label: "Company Information",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/log.svg",
+                  url: "https://drive.google.com/file/d/15-EQJYTEOoyKaf6_DXbAHc2pdssFY_P4/view?usp=sharing",
                 },
                 layout: "float-right",
               },
@@ -175,7 +175,7 @@ const Info = () => {
                 label: "Project and Job Details",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/register.svg",
+                  url: "https://drive.google.com/file/d/1NKhQSkdCXi9W-lRji-LWF7aBB8l0ia2Z/view?usp=sharing",
                 },
                 layout: "float-left",
               },
