@@ -1,7 +1,7 @@
 import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
-import { personal } from "../../assets";
+import { company, job, personal } from "../../assets";
 
 registerCoreBlocks();
 
@@ -102,7 +102,7 @@ const Info = () => {
                 label: "Company Information",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/log.svg",
+                  url: company,
                 },
                 layout: "float-right",
               },
@@ -176,7 +176,7 @@ const Info = () => {
                 label: "Project and Job Details",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/register.svg",
+                  url: job,
                 },
                 layout: "float-left",
               },
