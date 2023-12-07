@@ -27,7 +27,7 @@ const Info = () => {
                 label: "Personal Information",
                 attachment: {
                   type: "image",
-                  url: "./src/assets/personal.webp",
+                  url: "https://quillforms.com/wp-content/uploads/2022/01/4207-ai-1.jpeg",
                 },
                 layout: "float-left",
               },
