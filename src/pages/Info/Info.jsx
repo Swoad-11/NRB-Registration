@@ -1,6 +1,7 @@
 import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
+import { personal } from "../../assets";
 
 registerCoreBlocks();
 
@@ -27,7 +28,7 @@ const Info = () => {
                 label: "Personal Information",
                 attachment: {
                   type: "image",
-                  url: "../../assets/personal.jpg",
+                  url: personal,
                 },
                 layout: "float-left",
               },
