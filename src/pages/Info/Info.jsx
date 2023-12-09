@@ -40,7 +40,7 @@ const Info = () => {
           },
 
           {
-            name: "multiple-choice",
+            name: "dropdown",
             id: "sex",
             attributes: {
               required: true,
@@ -73,7 +73,7 @@ const Info = () => {
 
           {
             name: "email",
-            id: "email",
+            id: "contact_email",
             attributes: {
               required: true,
               label: "Contact Email",
@@ -81,8 +81,8 @@ const Info = () => {
           },
 
           {
-            name: "number",
-            id: "phone",
+            name: "short-text",
+            id: "phone_number",
             attributes: {
               required: true,
               label: "Phone Number",
@@ -108,25 +108,25 @@ const Info = () => {
             name: "short-text",
             id: "company_name",
             attributes: {
-              required: false,
+              required: true,
               label: "Company Name",
             },
           },
 
           {
             name: "short-text",
-            id: "position",
+            id: "position_in_company",
             attributes: {
-              required: false,
+              required: true,
               label: "Position in the Company",
             },
           },
 
           {
             name: "short-text",
-            id: "industry",
+            id: "industry_and_sector",
             attributes: {
-              required: false,
+              required: true,
               label: "Industry and Sector",
             },
           },
@@ -135,7 +135,7 @@ const Info = () => {
             name: "dropdown",
             id: "company_size",
             attributes: {
-              required: false,
+              required: true,
               label: "Company Size",
               choices: [
                 { label: "Small", value: "small" },
@@ -147,18 +147,18 @@ const Info = () => {
 
           {
             name: "website",
-            id: "company_website",
+            id: "company_website_url",
             attributes: {
-              required: false,
+              required: true,
               label: "Company Website URL",
             },
           },
 
           {
             name: "website",
-            id: "company_socials",
+            id: "social_media_profiles",
             attributes: {
-              required: false,
+              required: true,
               label: "Links to Company Social Media Profiles",
             },
           },
@@ -182,7 +182,7 @@ const Info = () => {
             name: "short-text",
             id: "job_title",
             attributes: {
-              required: true,
+              required: false,
               label: "Job / Project Title",
             },
           },
@@ -191,17 +191,26 @@ const Info = () => {
             name: "long-text",
             id: "job_description",
             attributes: {
-              required: true,
+              required: false,
               label: "Job / Project Description (Brief Summary)",
             },
           },
 
           {
             name: "long-text",
-            id: "required_skills",
+            id: "required_skills_expertise",
             attributes: {
-              required: true,
+              required: false,
               label: "Required Skills and Expertise",
+            },
+          },
+
+          {
+            name: "long-text",
+            id: "job_field",
+            attributes: {
+              required: false,
+              label: "Job Field",
             },
           },
 
@@ -209,13 +218,14 @@ const Info = () => {
             name: "dropdown",
             id: "job_type",
             attributes: {
-              required: true,
+              required: false,
               label: "Job Type",
               choices: [
                 { label: "Full-Time", value: "full_time" },
                 { label: "Part-Time", value: "part_time" },
                 { label: "Freelance", value: "freelance" },
               ],
+              defaultValue: null,
             },
           },
 
@@ -223,7 +233,7 @@ const Info = () => {
             name: "dropdown",
             id: "job_location",
             attributes: {
-              required: true,
+              required: false,
               label: "Job Location",
               choices: [
                 { label: "Remote", value: "remote" },
@@ -233,40 +243,43 @@ const Info = () => {
                   value: "specific_location",
                 },
               ],
+              defaultValue: null,
             },
           },
 
           {
             name: "date",
-            id: "start_date",
+            id: "job_start_date",
             attributes: {
-              required: true,
-              format: "DDMMYYYY",
-              separator: "/",
+              required: false,
+              format: "YYYYMMDD",
+              separator: "-",
               label: "Job / Project Start Date",
             },
           },
 
           {
             name: "dropdown",
-            id: "duration",
+            id: "job_duration",
             attributes: {
-              required: true,
+              required: false,
               label: "Job / Project Duration",
               choices: [
                 { label: "Contractual", value: "contractual" },
                 { label: "Yearly", value: "yearly" },
                 { label: "Permanent", value: "permanent" },
               ],
+              defaultValue: null,
             },
           },
 
           {
-            name: "number",
-            id: "budget",
+            name: "short-text",
+            id: "budge_range",
             attributes: {
-              required: true,
-              label: "Budget Range (Monthly) in USD",
+              required: false,
+              label: "Budget Range (Approx.) in USD",
+              placeholder: "eg. 500 - 600",
             },
           },
         ],
@@ -289,21 +302,68 @@ const Info = () => {
       // ... (your existing settings)
     },
   };
+  const handleSubmit = (data, { completeForm, setIsSubmitting }) => {
+    // Extract only key-value pairs from the form data
+    const postData = {};
+    Object.keys(data).forEach((blockId) => {
+      const block = data[blockId];
+      Object.keys(block).forEach((fieldId) => {
+        postData[fieldId] = block[fieldId].value;
+      });
+    });
+
+    // Handle form submission logic here
+    const token = "56e7f0c279c2380ddce47ca464eec24201be9492"; // Replace with your actual bearer token
+    const apiUrl = "http://192.168.0.101:8000/api/user/registration_job/"; // Replace with your actual API endpoint
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log("Submission successful:", responseData);
+        setIsSubmitting(false);
+        completeForm();
+      })
+      .catch((error) => {
+        console.error("Error during submission:", error);
+        setIsSubmitting(false);
+      });
+    console.log(postData);
+  };
 
   return (
     <div className="mt-2" style={{ width: "100%", height: "100vh" }}>
       <Form
         formId="registration-form"
         formObj={formObj}
+        onSubmit={handleSubmit}
+      />
+
+      {/* <Form
+        formId="registration-form"
+        formObj={formObj}
         onSubmit={(data, { completeForm, setIsSubmitting }) => {
-          // Handle form submission logic here
+          // Log only the values submitted
+          console.log("Submitted values:", data);
+
+          // Mock submission logic (remove this in production)
           setTimeout(() => {
             setIsSubmitting(false);
             completeForm();
           }, 500);
-          console.log(data);
         }}
-      />
+      /> */}
     </div>
   );
 };
