@@ -1,13 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Modal from "react-modal";
 
-const OtpVerification = () => {
+Modal.setAppElement("#root"); // Set the root element for accessibility
+
+const Otp = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [otpData, setOtpData] = useState({
-    email: location.state.email || "", // Get the email from the location state
+    email: location.state.email || "",
     otp: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [wrongOtpModalIsOpen, setWrongOtpModalIsOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +22,18 @@ const OtpVerification = () => {
     }));
   };
 
+  const openWrongOtpModal = () => {
+    setWrongOtpModalIsOpen(true);
+  };
+
+  const closeWrongOtpModal = () => {
+    setWrongOtpModalIsOpen(false);
+  };
+
   const handleOtpVerification = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
       const response = await fetch(
@@ -36,16 +51,17 @@ const OtpVerification = () => {
       );
 
       if (response.ok) {
-        // Successful verification, you can navigate to the next page or perform other actions
         console.log("OTP verification successful");
         navigate("/");
       } else {
         console.error("Error verifying OTP:", response.statusText);
-        // Log the response for further inspection
         console.log(await response.json());
+        openWrongOtpModal();
       }
     } catch (error) {
       console.error("Error verifying OTP:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,8 +86,8 @@ const OtpVerification = () => {
             name="email"
             value={otpData.email}
             onChange={handleChange}
-            readOnly // Make it read-only as it's coming from the previous signup
-            className="mt-1 p-2 w-full border rounded-md"
+            readOnly
+            className="mt-1 p-2 w-full border rounded-md text-gray-600"
           />
         </div>
 
@@ -95,12 +111,25 @@ const OtpVerification = () => {
         <button
           type="submit"
           className="w-full bg-purple-700 hover:bg-purple-800 text-white font-medium rounded-lg text-sm py-2"
+          disabled={loading} // Disable the button when loading
         >
-          Verify OTP
+          {loading ? "Verifying..." : "Verify OTP"}
         </button>
       </form>
+
+      {/* Wrong OTP Modal */}
+      <Modal
+        isOpen={wrongOtpModalIsOpen}
+        onRequestClose={closeWrongOtpModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <h2>Wrong OTP</h2>
+        <p>Please enter the correct OTP and try again.</p>
+        <button onClick={closeWrongOtpModal}>Close</button>
+      </Modal>
     </div>
   );
 };
 
-export default OtpVerification;
+export default Otp;
