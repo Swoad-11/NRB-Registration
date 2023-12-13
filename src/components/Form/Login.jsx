@@ -1,27 +1,50 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SocialMedia from "../SocialMedia/SocialMedia";
 import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = async (e) => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  const [loging, setLoging] = useState(false); // Loading state
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    const apiUrl = "http://127.0.0.1:8000/api/user/get_auth_token/";
-    const loginData = { email, password };
+    setLoging(true);
 
     try {
-      const response = await fetch(apiUrl, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${apiUrl}/get_auth_token/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginData),
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
       });
 
       if (!response.ok) {
@@ -41,12 +64,18 @@ const Login = () => {
       navigate("/profile");
     } catch (error) {
       console.error("Login failed:", error.message);
+
+      // Display error message in Snackbar
+      setSnackbarMessage("Login failed: Invalid credentials");
+      setSnackbarOpen(true);
+    } finally {
+      setLoging(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="sign-in-form">
+      <form onSubmit={handleLogin} className="sign-in-form">
         <h2 className="text-2xl font-semibold">Log in</h2>
 
         {/* Email Input */}
@@ -63,8 +92,8 @@ const Login = () => {
               name="email"
               id="email"
               autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
               required
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             />
@@ -85,25 +114,42 @@ const Login = () => {
               name="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               required
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             />
           </div>
         </div>
 
-        {/* Login Button */}
+        {/* Submit Button */}
         <button
           type="submit"
-          className="text-white bg-purple-700 hover:bg-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+          className="text-white bg-purple-700 hover:bg-purple-800
+        font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         >
-          Login
+          {loging ? "Loging in..." : "Login"}
         </button>
 
         {/* Social Media Links */}
         <SocialMedia value={"Login"} />
       </form>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        className="top-0 right-0"
+      >
+        <MuiAlert
+          elevation={7}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity="error"
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };

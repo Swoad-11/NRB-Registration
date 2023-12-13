@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Modal from "react-modal";
-
-Modal.setAppElement("#root"); // Set the root element for accessibility
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Otp = () => {
   const navigate = useNavigate();
@@ -11,8 +10,15 @@ const Otp = () => {
     email: location.state.email || "",
     otp: "",
   });
+
   const [loading, setLoading] = useState(false);
-  const [wrongOtpModalIsOpen, setWrongOtpModalIsOpen] = useState(false);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,33 +28,23 @@ const Otp = () => {
     }));
   };
 
-  const openWrongOtpModal = () => {
-    setWrongOtpModalIsOpen(true);
-  };
-
-  const closeWrongOtpModal = () => {
-    setWrongOtpModalIsOpen(false);
-  };
-
   const handleOtpVerification = async (e) => {
     e.preventDefault();
 
     setLoading(true);
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8000/api/user/user_account/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: otpData.email,
-            otp: otpData.otp,
-          }),
-        }
-      );
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${apiUrl}/user_account/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: otpData.email,
+          otp: otpData.otp,
+        }),
+      });
 
       if (response.ok) {
         console.log("OTP verification successful");
@@ -56,7 +52,10 @@ const Otp = () => {
       } else {
         console.error("Error verifying OTP:", response.statusText);
         console.log(await response.json());
-        openWrongOtpModal();
+
+        // Display error message in Snackbar
+        setSnackbarMessage("OTP verification failed: Invalid OTP");
+        setSnackbarOpen(true);
       }
     } catch (error) {
       console.error("Error verifying OTP:", error.message);
@@ -117,17 +116,21 @@ const Otp = () => {
         </button>
       </form>
 
-      {/* Wrong OTP Modal */}
-      <Modal
-        isOpen={wrongOtpModalIsOpen}
-        onRequestClose={closeWrongOtpModal}
-        className="modal"
-        overlayClassName="overlay"
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        className="top-0 right-0"
       >
-        <h2>Wrong OTP</h2>
-        <p>Please enter the correct OTP and try again.</p>
-        <button onClick={closeWrongOtpModal}>Close</button>
-      </Modal>
+        <MuiAlert
+          elevation={7}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity="error"
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 };

@@ -194,6 +194,7 @@ const Info = () => {
               required: false,
               label: "Job / Project Description (Brief Summary)",
             },
+            defaultValue: null,
           },
 
           {
@@ -203,6 +204,7 @@ const Info = () => {
               required: false,
               label: "Required Skills and Expertise",
             },
+            defaultValue: null,
           },
 
           {
@@ -212,6 +214,7 @@ const Info = () => {
               required: false,
               label: "Job Field",
             },
+            defaultValue: null,
           },
 
           {
@@ -256,6 +259,7 @@ const Info = () => {
               separator: "-",
               label: "Job / Project Start Date",
             },
+            defaultValue: null,
           },
 
           {
@@ -281,6 +285,7 @@ const Info = () => {
               label: "Budget Range (Approx.) in USD",
               placeholder: "eg. 500 - 600",
             },
+            defaultValue: null,
           },
         ],
       },
@@ -313,8 +318,8 @@ const Info = () => {
     });
 
     // Handle form submission logic here
-    const token = "56e7f0c279c2380ddce47ca464eec24201be9492"; // Replace with your actual bearer token
-    const apiUrl = "http://192.168.0.101:8000/api/user/registration_job/"; // Replace with your actual API endpoint
+    const token = localStorage.getItem("token"); // Replace with your actual bearer token
+    const apiUrl = "http://127.0.0.1:8000/api/user/registration_job/"; // Replace with your actual API endpoint
 
     fetch(apiUrl, {
       method: "POST",
