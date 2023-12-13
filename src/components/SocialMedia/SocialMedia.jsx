@@ -1,5 +1,8 @@
 import { FaFacebookF, FaGoogle } from "react-icons/fa6";
-import { FaGithub, FaWpforms } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+
+// ############## test routes ##############
+import { FaWpforms } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -39,7 +42,7 @@ const SocialMedia = ({ value }) => {
         >
           <Link to="/info" className="flex items-center">
             <FaWpforms />
-            <span className="ml-2">Info Form</span>
+            <span className="ml-2">Form</span>
           </Link>
         </button>
       </div>

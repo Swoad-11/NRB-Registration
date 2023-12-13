@@ -1,4 +1,10 @@
-import { FaHome, FaInbox, FaSignOutAlt, FaUser } from "react-icons/fa";
+import {
+  FaHome,
+  FaInbox,
+  FaSignOutAlt,
+  FaUser,
+  FaWpforms,
+} from "react-icons/fa";
 import Profile from "../Profile/Profile";
 import SidebarItem from "../../components/SidebarItem/SidebarItem";
 import { Link } from "react-router-dom";
@@ -143,6 +149,9 @@ const Sidebar = () => {
               notification={notification}
             />
             <SidebarItem itemName={"Profile"} logo={<FaUser />} />
+            <Link to="/info">
+              <SidebarItem itemName={"Registration"} logo={<FaWpforms />} />
+            </Link>
             <SidebarItem itemName={"Logout"} logo={<FaSignOutAlt />} />
           </ul>
         </div>
