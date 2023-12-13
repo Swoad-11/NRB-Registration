@@ -1,6 +1,7 @@
 import { FaHome, FaInbox, FaSignOutAlt, FaUser } from "react-icons/fa";
 import Profile from "../Profile/Profile";
 import SidebarItem from "../../components/SidebarItem/SidebarItem";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const notification = (
@@ -41,11 +42,11 @@ const Sidebar = () => {
                   ></path>
                 </svg>
               </button>
-              <a href="https://flowbite.com" className="flex ms-2 md:me-24">
+              <Link to="/" className="flex ms-2 md:me-24">
                 <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
                   NRB
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="flex items-center">
               <div className="flex items-center ms-3">
