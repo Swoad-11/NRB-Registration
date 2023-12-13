@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdEmail } from "react-icons/md";
-import { FaLock } from "react-icons/fa";
 import SocialMedia from "./../SocialMedia/SocialMedia";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -75,82 +73,74 @@ const Signup = () => {
 
   return (
     <div>
-      <form onSubmit={handleSignup} className="sign-up-form">
+      <form onSubmit={handleSignup} className="mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Sign up</h2>
 
-        {/* Email Input */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Email Address
-          </label>
-          <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <MdEmail className="h-5 w-5 text-gray-400" />
-            </div>
+        <div className="max-w-sm mx-auto">
+          {/* Email Input */}
+          <div className="flex flex-col mb-1">
+            <label className="text-sm font-bold text-gray-600 mb-1">
+              Email Address
+            </label>
             <input
               type="email"
               name="email"
               id="email"
               autoComplete="email"
+              placeholder="Enter your Email Address"
               value={formData.email}
               onChange={handleChange}
               required
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+              className="border rounded-md bg-white px-3 py-2"
             />
           </div>
-        </div>
 
-        {/* Password Input */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaLock className="h-5 w-5 text-gray-400" />
+          {/* Password Input */}
+          <div className="flex flex-col mb-1">
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="border rounded-md bg-white px-3 py-2 "
+              />
             </div>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-            />
           </div>
-        </div>
 
-        {/* Password Input */}
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700">
-            Confirm Password
-          </label>
-          <div className="mt-1 relative rounded-md shadow-sm">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FaLock className="h-5 w-5 text-gray-400" />
+          {/* Password Input */}
+          <div className="flex flex-col mb-1">
+            <label className="block text-sm font-medium text-gray-700">
+              Confirm Password
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                autoComplete="current-password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                className="border rounded-md bg-white px-3 py-2"
+              />
             </div>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              autoComplete="current-password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-            />
           </div>
-        </div>
 
-        {/* Reg Type */}
-        <div className="form-input">
-          <label className="block text-sm font-medium text-gray-700">
-            You are:
+          {/* Reg Type */}
+          <label className="block mb-2 text-sm font-medium text-gray-900">
+            Select your role
           </label>
           <select
-            className="mb-6"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
             id="is_client"
             name="is_client"
             value={formData.is_client}
@@ -165,7 +155,7 @@ const Signup = () => {
         <button
           type="submit"
           className="text-white bg-purple-700 hover:bg-purple-800
-        font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+        font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
         >
           {signing ? "Signing Up..." : "Sign Up"}
         </button>
