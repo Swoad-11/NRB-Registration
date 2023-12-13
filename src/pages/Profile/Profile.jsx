@@ -1,49 +1,68 @@
-const Profile = () => {
+import { useState, useEffect } from "react";
+
+const UserDataComponent = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/registration`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setUserData(data.response);
+
+        // Log the response data
+        console.log("Response Data:", data.response);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []); // The empty dependency array ensures the effect runs only once after the initial render
+
   return (
-    <div className="mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Client Profile</h1>
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Contact Information</h2>
-        <p>Full Name: </p>
-        <p>Sex: </p>
-        <p>Occupation: </p>
-        <p>Company Name: </p>
-        <p>Designation: </p>
-        <p>Contact Email: </p>
-        <p>Country: </p>
-        <p>Phone Number: </p>
-        <p>Address: </p>
-      </div>
-
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Company Information</h2>
-        {/* Display company information if available */}
-        <p>Company Name: </p>
-        <p>Industry and Sector: </p>
-        {/* Add more fields as needed */}
-      </div>
-
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">Project and Job Details</h2>
-        {/* Display project/job details if available */}
-        <p>Project or Job Description:</p>
-        <p>Job Title or Project Name: </p>
-        {/* Add more fields as needed */}
-      </div>
-
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold mb-2">
-          Communication Preferences
-        </h2>
-        {/* Display communication preferences fields */}
-        <p>Username and Profile Display Name: </p>
-        <p>Profile Photo or Company Logo: </p>
-        {/* Add more fields as needed */}
-      </div>
-
-      {/* Add sections for Security and Verification, Checkboxes, and other profile information */}
+    <div>
+      {userData && (
+        <div>
+          <p>Full Name: {userData.full_name}</p>
+          <p>Sex: {userData.sex}</p>
+          <p>Country: {userData.country}</p>
+          <p>Address: {userData.address}</p>
+          <p>Contact Email: {userData.contact_email}</p>
+          <p>Phone Number: {userData.phone_number}</p>
+          <p>Company Name: {userData.company_name}</p>
+          <p>Position in Company: {userData.position_in_company}</p>
+          <p>Industry and Sector: {userData.industry_and_sector}</p>
+          <p>Company Size: {userData.company_size}</p>
+          <p>
+            Company Website URL:{" "}
+            <a href={userData.company_website_url}>
+              {userData.company_website_url}
+            </a>
+          </p>
+          <p>
+            Social Media Profiles:{" "}
+            <a href={userData.social_media_profiles}>
+              {userData.social_media_profiles}
+            </a>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Profile;
+export default UserDataComponent;

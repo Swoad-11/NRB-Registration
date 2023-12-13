@@ -10,7 +10,7 @@ const Signup = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    is_client: "True",
+    role: "client",
   });
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -34,7 +34,7 @@ const Signup = () => {
     e.preventDefault();
     setSigning(true);
 
-    const { password, confirmPassword } = formData;
+    const { password, confirmPassword, role } = formData;
     if (password !== confirmPassword) {
       // Display error message in Snackbar
       setSnackbarMessage("Passwords do not match");
@@ -44,6 +44,19 @@ const Signup = () => {
       return;
     }
 
+    // Log form data before sending the request
+    console.log("Form Data:", formData);
+
+    const requestBody = {
+      email: formData.email,
+      password: formData.password,
+      is_client: role === "client",
+      is_freelancer: role === "freelancer",
+    };
+
+    // Log the JSON body
+    console.log("Request JSON Body:", JSON.stringify(requestBody));
+
     try {
       const apiUrl = import.meta.env.VITE_API_URL;
       const response = await fetch(`${apiUrl}/send_otp/`, {
@@ -51,11 +64,7 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-          is_client: formData.is_client === "True",
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (response.ok) {
@@ -141,13 +150,13 @@ const Signup = () => {
           </label>
           <select
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-            id="is_client"
-            name="is_client"
-            value={formData.is_client}
+            id="role"
+            name="role"
+            value={formData.role}
             onChange={handleChange}
           >
-            <option value="True">Client</option>
-            <option value="False">Freelancer</option>
+            <option value="client">Client</option>
+            <option value="freelancer">Freelancer</option>
           </select>
         </div>
 

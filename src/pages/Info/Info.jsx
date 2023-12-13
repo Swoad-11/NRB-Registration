@@ -2,6 +2,8 @@ import { Form } from "@quillforms/renderer-core";
 import "@quillforms/renderer-core/build-style/style.css";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import { company, ipsita_logo, job, personal } from "../../assets";
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 
 registerCoreBlocks();
 
@@ -349,6 +351,10 @@ const Info = () => {
 
   return (
     <div className="mt-2" style={{ width: "100%", height: "100vh" }}>
+      <Link to="/profile" className="flex items-center z-99">
+        <FaHome />
+        <span className="ml-2">Profile</span>
+      </Link>
       <Form
         formId="registration-form"
         formObj={formObj}
