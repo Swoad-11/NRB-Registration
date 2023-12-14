@@ -8,8 +8,8 @@ const UserDataComponent = () => {
       try {
         const token = localStorage.getItem("token");
         const apiUrl = import.meta.env.VITE_API_URL;
-        const response = await fetch(`${apiUrl}/registration`, {
-          method: "GET",
+        const response = await fetch(`${apiUrl}/registration/`, {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -34,26 +34,30 @@ const UserDataComponent = () => {
   }, []); // The empty dependency array ensures the effect runs only once after the initial render
 
   return (
-    <div>
+    <div className="mx-auto p-4">
       {userData && (
-        <div>
-          <p>Full Name: {userData.full_name}</p>
-          <p>Sex: {userData.sex}</p>
-          <p>Country: {userData.country}</p>
-          <p>Address: {userData.address}</p>
-          <p>Contact Email: {userData.contact_email}</p>
-          <p>Phone Number: {userData.phone_number}</p>
-          <p>Company Name: {userData.company_name}</p>
-          <p>Position in Company: {userData.position_in_company}</p>
-          <p>Industry and Sector: {userData.industry_and_sector}</p>
-          <p>Company Size: {userData.company_size}</p>
-          <p>
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <p className="mb-4 font-semibold">Full Name: {userData.full_name}</p>
+          <p className="mb-4 font-semibold">Sex: {userData.sex}</p>
+          <p className="mb-4">Country: {userData.country}</p>
+          <p className="mb-4">Address: {userData.address}</p>
+          <p className="mb-4">Contact Email: {userData.contact_email}</p>
+          <p className="mb-4">Phone Number: {userData.phone_number}</p>
+          <p className="mb-4">Company Name: {userData.company_name}</p>
+          <p className="mb-4">
+            Position in Company: {userData.position_in_company}
+          </p>
+          <p className="mb-4">
+            Industry and Sector: {userData.industry_and_sector}
+          </p>
+          <p className="mb-4">Company Size: {userData.company_size}</p>
+          <p className="mb-4">
             Company Website URL:{" "}
             <a href={userData.company_website_url}>
               {userData.company_website_url}
             </a>
           </p>
-          <p>
+          <p className="mb-4">
             Social Media Profiles:{" "}
             <a href={userData.social_media_profiles}>
               {userData.social_media_profiles}

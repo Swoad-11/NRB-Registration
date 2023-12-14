@@ -1,147 +1,131 @@
 import { useState } from "react";
 import SocialMedia from "../SocialMedia/SocialMedia";
+import { FaLock } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
-  const [loging, setLoging] = useState(false); // Loading state
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoging(true);
+
+    const loginApiUrl = "http://127.0.0.1:8000/api/user/get_auth_token/";
+    const registrationApiUrl = "http://127.0.0.1:8000/api/user/registration/";
+
+    const loginData = { email, password };
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${apiUrl}/get_auth_token/`, {
+      // Attempt to log in
+      const loginResponse = await fetch(loginApiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: JSON.stringify(loginData),
       });
 
-      if (!response.ok) {
+      if (!loginResponse.ok) {
         throw new Error("Invalid credentials");
       }
 
-      const data = await response.json();
-      const token = data.token;
-
       // Save token to local storage
+      const loginDataJson = await loginResponse.json();
+      const token = loginDataJson.token;
       localStorage.setItem("token", token);
 
       // Log the token to the console
       console.log("Token:", token);
 
-      // Redirect to the profile page after successful login
-      navigate("/profile");
+      // Check if registration is completed
+      const registrationResponse = await fetch(registrationApiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!registrationResponse.ok) {
+        throw new Error("Failed to check registration status");
+      }
+
+      const registrationData = await registrationResponse.json();
+
+      if (registrationData.exists) {
+        // If registration is complete, navigate to the profile page
+        navigate("/profile");
+      } else {
+        // If registration is not complete, navigate to the info page
+        navigate("/info");
+      }
     } catch (error) {
       console.error("Login failed:", error.message);
-
-      // Display error message in Snackbar
-      setSnackbarMessage("Login failed: Invalid credentials");
-      setSnackbarOpen(true);
-    } finally {
-      setLoging(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleLogin} className="mx-auto">
-        <h2 className="text-2xl font-semibold mb-6">Log in</h2>
+      <form onSubmit={handleSubmit} className="sign-in-form">
+        <h2 className="text-2xl font-semibold">Log in</h2>
 
         {/* Email Input */}
-        <div className="flex flex-col mb-2">
-          <label className="text-sm font-bold text-gray-600">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">
             Email Address
           </label>
           <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <MdEmail className="h-5 w-5 text-gray-400" />
+            </div>
             <input
               type="email"
               name="email"
               id="email"
               autoComplete="email"
-              placeholder="Enter your Email Address"
-              value={formData.email}
-              onChange={handleChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              className="border rounded-md bg-white px-3 py-2"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             />
           </div>
         </div>
 
         {/* Password Input */}
-        <div className="flex flex-col mb-2">
-          <label className="text-sm font-bold text-gray-600">Password</label>
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
           <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FaLock className="h-5 w-5 text-gray-400" />
+            </div>
             <input
               type="password"
               name="password"
               id="password"
-              placeholder="Enter your password"
               autoComplete="current-password"
-              value={formData.password}
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
-              className="border rounded-md bg-white px-3 py-2"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
             />
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* Login Button */}
         <button
           type="submit"
-          className="text-white bg-purple-700 hover:bg-purple-800
-        font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
+          className="text-white bg-purple-700 hover:bg-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
         >
-          {loging ? "Loging in..." : "Login"}
+          Login
         </button>
 
         {/* Social Media Links */}
         <SocialMedia value={"Login"} />
       </form>
-
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        className="top-0 right-0"
-      >
-        <MuiAlert
-          elevation={7}
-          variant="filled"
-          onClose={handleSnackbarClose}
-          severity="error"
-        >
-          {snackbarMessage}
-        </MuiAlert>
-      </Snackbar>
     </div>
   );
 };
