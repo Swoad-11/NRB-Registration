@@ -10,6 +10,10 @@ import SidebarItem from "../../components/SidebarItem/SidebarItem";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    // Clear the token from local storage
+    localStorage.removeItem("token");
+  };
   const notification = (
     <>
       <span
@@ -152,7 +156,9 @@ const Sidebar = () => {
             <Link to="/info">
               <SidebarItem itemName={"Registration"} logo={<FaWpforms />} />
             </Link>
-            <SidebarItem itemName={"Logout"} logo={<FaSignOutAlt />} />
+            <Link onClick={handleLogout} to="/">
+              <SidebarItem itemName={"Logout"} logo={<FaSignOutAlt />} />
+            </Link>
           </ul>
         </div>
       </aside>
