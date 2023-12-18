@@ -61,6 +61,10 @@ const UserDataComponent = () => {
               {userData.address}
             </div>
             <div className="mb-4">
+              <span className="font-semibold pr-2">NID / Passport:</span>
+              {userData.nid_passport}
+            </div>
+            <div className="mb-4">
               <span className="font-semibold pr-2">Contact Email:</span>
               {userData.contact_email}
             </div>
@@ -74,7 +78,7 @@ const UserDataComponent = () => {
           <div className="flex flex-col items-center justify-center">
             {/* Dummy Profile Image (replace with actual image upload) */}
             <img
-              src={img}
+              src={userData.profile_pic}
               alt="Profile"
               className="w-40 h-40 rounded object-cover mb-4"
             />
