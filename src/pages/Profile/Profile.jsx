@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import img from "../../assets/dummy.jpg";
 
 const UserDataComponent = () => {
   const [userData, setUserData] = useState(null);
@@ -36,59 +37,89 @@ const UserDataComponent = () => {
   return (
     <div className="mx-auto p-4">
       {userData && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          {/* Personal Information Section */}
+          <div>
+            <div className="mb-4 pb-2 border-b-2 border-gray-300">
+              <h2 className="text-xl font-semibold">Personal Information</h2>
+            </div>
+
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Full Name:</span>
+              {userData.full_name}
+            </div>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Sex:</span>
+              {userData.sex}
+            </div>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Country:</span>
+              {userData.country}
+            </div>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Address:</span>
+              {userData.address}
+            </div>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Contact Email:</span>
+              {userData.contact_email}
+            </div>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Phone Number:</span>
+              {userData.phone_number}
+            </div>
+          </div>
+
+          {/* Image Upload Section (on the right side) */}
+          <div className="flex flex-col items-center justify-center">
+            {/* Dummy Profile Image (replace with actual image upload) */}
+            <img
+              src={img}
+              alt="Profile"
+              className="w-40 h-40 rounded object-cover mb-4"
+            />
+
+            {/* Add your image upload component here */}
+            <input type="file" className="border border-gray-300 p-2" />
+            {/* Add styling for image upload here */}
+          </div>
+        </div>
+      )}
+
+      {/* Company Information Section */}
+      {userData && (
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Full Name:</span>
-            {userData.full_name}
-          </p>
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Sex:</span>
-            {userData.sex}
-          </p>
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Country:</span>
-            {userData.country}
-          </p>
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Address:</span>
-            {userData.address}
-          </p>
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Contact Email:</span>
-            {userData.contact_email}
-          </p>
-          <p className="mb-4">
-            <span className="font-semibold pr-2">Phone Number:</span>
-            {userData.phone_number}
-          </p>
-          <p className="mb-4">
+          <div className="mb-4 pb-2 border-b-2 border-gray-300">
+            <h2 className="text-xl font-semibold">Company Information</h2>
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Company Name:</span>
             {userData.company_name}
-          </p>
-          <p className="mb-4">
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Position in Company:</span>
             {userData.position_in_company}
-          </p>
-          <p className="mb-4">
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Industry and Sector:</span>
             {userData.industry_and_sector}
-          </p>
-          <p className="mb-4">
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Company Size:</span>
             {userData.company_size}
-          </p>
-          <p className="mb-4">
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Company Website URL:</span>
             <a href={userData.company_website_url}>
               {userData.company_website_url}
             </a>
-          </p>
-          <p className="mb-4">
+          </div>
+          <div className="mb-4">
             <span className="font-semibold pr-2">Social Media Profiles:</span>
             <a href={userData.social_media_profiles}>
               {userData.social_media_profiles}
             </a>
-          </p>
+          </div>
         </div>
       )}
     </div>
