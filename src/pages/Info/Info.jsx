@@ -225,6 +225,7 @@ const Info = () => {
               required: false,
               label: "Job / Project Title",
             },
+            defaultValue: null,
           },
 
           {

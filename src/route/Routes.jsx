@@ -3,7 +3,7 @@ import Main from "../layout/Main";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import Info from "./../pages/Info/Info";
 import Sidebar from "../pages/Sidebar/Sidebar";
-import Otp from "../pages/otp/otp";
+import Otp from "../pages/Otp/Otp";
 import Registration from "../pages/Registration/Registration";
 
 const routes = [
