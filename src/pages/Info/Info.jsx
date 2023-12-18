@@ -89,7 +89,7 @@ const Info = () => {
 
           {
             name: "short-text",
-            id: "nid-passport",
+            id: "nid_passport",
             attributes: {
               required: true,
               label: "NID / Passport",
