@@ -82,7 +82,7 @@ export default function App() {
         {...register("Job title or project name", {})}
       />
       <select {...register("Job sector")}>
-        <option value="IT">IT</option>
+        <option value="IT">I.T</option>
         <option value="Civil">Civil</option>
         <option value="Business">Business</option>
         <option value="C&A">C&A</option>
