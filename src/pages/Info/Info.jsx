@@ -363,7 +363,7 @@ const Info = () => {
     },
   };
 
-  const handleSubmit = (data, { completeForm, setIsSubmitting }) => {
+  const handleSubmit = async (data, { completeForm, setIsSubmitting }) => {
     // Extract only key-value pairs from the form data
     const postData = {};
     Object.keys(data).forEach((blockId) => {
@@ -374,32 +374,32 @@ const Info = () => {
     });
 
     // Handle form submission logic here
-    const token = localStorage.getItem("token"); // Replace with your actual bearer token
-    const apiUrl = import.meta.env.VITE_API_URL + "/registration_job/";
+    try {
+      const token = localStorage.getItem("token"); // Replace with your actual bearer token
+      const apiUrl = import.meta.env.VITE_API_URL + "/registration_job/";
 
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(postData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((responseData) => {
-        console.log("Submission successful:", responseData);
-        setIsSubmitting(false);
-        completeForm();
-      })
-      .catch((error) => {
-        console.error("Error during submission:", error);
-        setIsSubmitting(false);
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(postData),
       });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseData = await response.json();
+      console.log("Submission successful:", responseData);
+      setIsSubmitting(false);
+      completeForm();
+    } catch (error) {
+      console.error("Error during submission:", error);
+      setIsSubmitting(false);
+    }
+
     console.log(postData);
   };
 

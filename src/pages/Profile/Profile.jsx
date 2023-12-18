@@ -66,7 +66,7 @@ const UserDataComponent = () => {
             </div>
             <div className="mb-4">
               <span className="font-semibold pr-2">Phone Number:</span>
-              {userData.phone_number}
+              {userData.phone_personal}
             </div>
           </div>
 
@@ -107,6 +107,10 @@ const UserDataComponent = () => {
           <div className="mb-4">
             <span className="font-semibold pr-2">Company Size:</span>
             {userData.company_size}
+          </div>
+          <div className="mb-4">
+            <span className="font-semibold pr-2">Company Contact Number:</span>
+            {userData.phone_company}
           </div>
           <div className="mb-4">
             <span className="font-semibold pr-2">Company Website URL:</span>
