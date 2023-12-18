@@ -373,8 +373,7 @@ const Info = () => {
 
     // Handle form submission logic here
     const token = localStorage.getItem("token"); // Replace with your actual bearer token
-    const apiUrl =
-      "https://nrb-serv-django.onrender.com/api/user/registration_job/"; // Replace with your actual API endpoint
+    const apiUrl = "https://tanvir14ahmed.space/nrb/api/user/registration_job/"; // Replace with your actual API endpoint
 
     fetch(apiUrl, {
       method: "POST",
