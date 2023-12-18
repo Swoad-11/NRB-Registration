@@ -56,11 +56,25 @@ const Info = () => {
           },
 
           {
-            name: "short-text",
+            name: "dropdown",
             id: "country",
             attributes: {
               required: true,
               label: "Country",
+              choices: [
+                { label: "Bangladesh", value: "bd" },
+                { label: "UK", value: "uk" },
+                { label: "US", value: "us" },
+              ],
+            },
+          },
+
+          {
+            name: "short-text",
+            id: "phone_personal",
+            attributes: {
+              required: true,
+              label: "Phone Number",
             },
           },
 
@@ -74,20 +88,20 @@ const Info = () => {
           },
 
           {
+            name: "short-text",
+            id: "nid-passport",
+            attributes: {
+              required: true,
+              label: "NID / Passport",
+            },
+          },
+
+          {
             name: "email",
             id: "contact_email",
             attributes: {
               required: true,
               label: "Contact Email",
-            },
-          },
-
-          {
-            name: "short-text",
-            id: "phone_number",
-            attributes: {
-              required: true,
-              label: "Phone Number",
             },
           },
         ],
@@ -125,11 +139,26 @@ const Info = () => {
           },
 
           {
-            name: "short-text",
+            name: "dropdown",
             id: "industry_and_sector",
             attributes: {
               required: true,
               label: "Industry and Sector",
+              choices: [
+                { label: "Agro based Industry", value: "agro" },
+                { label: "Archi./Engg./Construction", value: "engg" },
+                { label: "Automobile/Industrial Machine", value: "automob" },
+                { label: "Bank/Fin. Institution", value: "fin" },
+                { label: "Wholesale/ Retail/ Export-Import", value: "c&a" },
+                { label: "Electronics/Consumer Durables", value: "electro" },
+                { label: "Energy/Power/Fuel", value: "energy" },
+                { label: "Garments/Textile", value: "tex" },
+                { label: "Telecommunication", value: "tel" },
+                { label: "Pharmaceuticals", value: "phm" },
+                { label: "Information Technology", value: "it" },
+                { label: "Logistics/Transportation", value: "log" },
+                { label: "Others", value: "other" },
+              ],
             },
           },
 
@@ -140,10 +169,19 @@ const Info = () => {
               required: true,
               label: "Company Size",
               choices: [
-                { label: "Small", value: "small" },
-                { label: "Medium", value: "medium" },
-                { label: "Large", value: "large" },
+                { label: "Less than 10", value: "10" },
+                { label: "Less than equal 50", value: "50" },
+                { label: "Greater than 100", value: "100" },
               ],
+            },
+          },
+
+          {
+            name: "short-text",
+            id: "phone_company",
+            attributes: {
+              required: true,
+              label: "Company Contact Number",
             },
           },
 
@@ -190,6 +228,30 @@ const Info = () => {
           },
 
           {
+            name: "dropdown",
+            id: "job_field",
+            attributes: {
+              required: false,
+              label: "Job Field",
+              choices: [
+                { label: "Agro based Industry", value: "agro" },
+                { label: "Archi./Engg./Construction", value: "engg" },
+                { label: "Automobile/Industrial Machine", value: "automob" },
+                { label: "Bank/Fin. Institution", value: "fin" },
+                { label: "Wholesale/ Retail/ Export-Import", value: "c&a" },
+                { label: "Electronics/Consumer Durables", value: "electro" },
+                { label: "Energy/Power/Fuel", value: "energy" },
+                { label: "Garments/Textile", value: "tex" },
+                { label: "Telecommunication", value: "tel" },
+                { label: "Pharmaceuticals", value: "phm" },
+                { label: "Information Technology", value: "it" },
+                { label: "Logistics/Transportation", value: "log" },
+              ],
+            },
+            defaultValue: null,
+          },
+
+          {
             name: "long-text",
             id: "job_description",
             attributes: {
@@ -205,16 +267,6 @@ const Info = () => {
             attributes: {
               required: false,
               label: "Required Skills and Expertise",
-            },
-            defaultValue: null,
-          },
-
-          {
-            name: "long-text",
-            id: "job_field",
-            attributes: {
-              required: false,
-              label: "Job Field",
             },
             defaultValue: null,
           },

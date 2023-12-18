@@ -4,6 +4,7 @@ import LandingPage from "../pages/LandingPage/LandingPage";
 import Info from "./../pages/Info/Info";
 import Sidebar from "../pages/Sidebar/Sidebar";
 import Otp from "../pages/otp/otp";
+import Registration from "../pages/Registration/Registration";
 
 const routes = [
   {
@@ -14,6 +15,7 @@ const routes = [
       { path: "/info", element: <Info /> },
       { path: "/profile", element: <Sidebar /> },
       { path: "/otp", element: <Otp /> },
+      { path: "/reg", element: <Registration /> },
     ],
   },
 ];
