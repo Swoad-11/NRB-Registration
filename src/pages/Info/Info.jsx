@@ -362,6 +362,7 @@ const Info = () => {
       // ... (your existing settings)
     },
   };
+
   const handleSubmit = (data, { completeForm, setIsSubmitting }) => {
     // Extract only key-value pairs from the form data
     const postData = {};
@@ -374,8 +375,7 @@ const Info = () => {
 
     // Handle form submission logic here
     const token = localStorage.getItem("token"); // Replace with your actual bearer token
-    const apiUrl =
-      "https://nrb-serv-django.onrender.com/api/user/registration_job/"; // Replace with your actual API endpoint
+    const apiUrl = import.meta.env.VITE_API_URL + "/registration_job/";
 
     fetch(apiUrl, {
       method: "POST",
