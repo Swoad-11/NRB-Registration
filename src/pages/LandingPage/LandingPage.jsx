@@ -25,12 +25,9 @@ const LandingPage = () => {
 
       <div className="panels-container">
         <div className="panel left-panel">
-          <div className="content">
-            <h3>New here ?</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
-            </p>
+          <div className="content mx-auto">
+            <h3>connect2bd</h3>
+            <p>Let`s Dive Into The Pelagic Of Talents</p>
             <button
               className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
              text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600
@@ -48,12 +45,9 @@ const LandingPage = () => {
           <img src={img1} className="image" alt="" />
         </div>
         <div className="panel right-panel">
-          <div className="content">
+          <div className="content mx-auto">
             <h3>One of us ?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
-            </p>
+            <p>Let`s Finish the Good Work Then</p>
             <button
               className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden
              text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600
