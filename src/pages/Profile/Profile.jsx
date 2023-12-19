@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import img from "../../assets/dummy.jpg";
+// import img from "../../assets/dummy.jpg";
 
 const UserDataComponent = () => {
   const [userData, setUserData] = useState(null);
@@ -81,18 +81,13 @@ const UserDataComponent = () => {
               </label>
               <span className="text-gray-700">{userData.address}</span>
             </div>
-            <div className="mb-4 border-b">
-              <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                Email:
-              </span>
-              <span className="text-gray-700">{userData.contact_email}</span>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Contact Email:</span>
+              {userData.contact_email}
             </div>
-
-            <div className="border-b">
-              <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                Phone Number:
-              </span>
-              <span className="text-gray-700">{userData.phone_personal}</span>
+            <div className="mb-4">
+              <span className="font-semibold pr-2">Phone Number:</span>
+              {userData.phone_number}
             </div>
           </div>
 
@@ -103,7 +98,7 @@ const UserDataComponent = () => {
           >
             {/* Dummy Profile Image (replace with actual image upload) */}
             <img
-              src={img}
+              src={userData.profile_pic}
               alt="Profile"
               className="w-40 h-40 rounded object-cover mb-4"
             />
@@ -162,6 +157,7 @@ const UserDataComponent = () => {
               </div>
             </div>
           </div>
+
           <div className="mb-4 border-b">
             <label
               htmlFor="first_name"
@@ -170,9 +166,9 @@ const UserDataComponent = () => {
               Company Website URL
             </label>
             <span className="text-gray-700">
-              <a href={userData.company_website_url}>
-                {userData.company_website_url}
-              </a>
+            <a href={userData.company_website_url}>
+              {userData.company_website_url}
+            </a>
             </span>
           </div>
           <div className="mb-4 border-b">
