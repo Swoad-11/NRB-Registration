@@ -8,8 +8,15 @@ import {
 import Profile from "../Profile/Profile";
 import SidebarItem from "../../components/SidebarItem/SidebarItem";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleLogout = () => {
     // Clear the token from local storage
     localStorage.removeItem("token");
@@ -31,10 +38,11 @@ const Sidebar = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
               <button
+                type="button"
+                onClick={toggleMenu}
                 data-drawer-target="logo-sidebar"
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
-                type="button"
                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-violet-300 focus:outline-none focus:ring-2"
               >
                 <span className="sr-only">Open sidebar</span>
@@ -140,8 +148,9 @@ const Sidebar = () => {
 
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full
-         bg-violet-300 border-r border-gray-200 sm:translate-x-0"
+        className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } bg-violet-300 border-r border-gray-200 sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-violet-300">
