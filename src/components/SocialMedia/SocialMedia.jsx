@@ -10,7 +10,7 @@ const SocialMedia = ({ value }) => {
         <button
           type="button"
           className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 font-medium rounded-lg text-sm 
-          px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
+          px-2 py-2.5 text-center inline-flex items-center me-2 mb-2"
         >
           <FaFacebookF />
           <span className="ml-2">Facebook</span>
@@ -18,7 +18,7 @@ const SocialMedia = ({ value }) => {
         <button
           type="button"
           className="text-white bg-[#24292F] hover:bg-[#24292F]/90 font-medium rounded-lg text-sm
-           px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
+           px-2 py-2.5 text-center inline-flex items-center me-2 mb-2"
         >
           <FaGithub />
           <span className="ml-2">Github</span>
@@ -26,7 +26,7 @@ const SocialMedia = ({ value }) => {
         <button
           type="button"
           className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 font-medium rounded-lg text-sm
-           px-5 py-2.5 text-center inline-flex items-center me-2 mb-2"
+           px-2 py-2.5 text-center inline-flex items-center me-2 mb-2"
         >
           <FaGoogle />
           <span className="ml-2">Google</span>
