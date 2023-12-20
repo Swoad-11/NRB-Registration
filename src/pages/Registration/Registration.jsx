@@ -1,152 +1,44 @@
-import { Controller, useForm } from "react-hook-form";
-import DatePicker from "react-datepicker";
+import { useState } from "react";
+import Welcome from "../../components/RegistrationComponents/Welcome";
+import PersonalInfo from "../../components/RegistrationComponents/PersonalInfo";
+import CompanyInfo from "../../components/RegistrationComponents/CompanyInfo";
+import Success from "../../components/RegistrationComponents/Success";
 
-export default function App() {
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+const Registration = () => {
+  const [step, setStep] = useState(1);
+
+  const nextPage = () => {
+    setStep(step + 1);
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <Welcome onNext={nextPage} />;
+      case 2:
+        return <PersonalInfo onNext={nextPage} />;
+      case 3:
+        return <CompanyInfo onNext={nextPage} />;
+      case 4:
+        return <Success />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        placeholder="Full Name"
-        {...register("Full Name", { required: true })}
-      />
-      <select {...register("Sex", { required: true })}>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-      <textarea {...register} />
-      <select {...register("Country")}>
-        <option value="BD">BD</option>
-        <option value="US">US</option>
-        <option value="UK">UK</option>
-        <option value="UAE">UAE</option>
-        <option value="EU">EU</option>
-      </select>
-      <input
-        type="tel"
-        placeholder="Phone Number"
-        {...register("Phone Number", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Contact Email"
-        {...register("Contact Email", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Company Name"
-        {...register("Company Name", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Company Logo"
-        {...register("Company Logo", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Position in the company"
-        {...register("Position in the company", { required: true })}
-      />
-      <select {...register("Industry and sector", { required: true })}>
-        <option value="IT">IT</option>
-        <option value="Civil">Civil</option>
-        <option value="Business">Business</option>
-        <option value="C&A">C&A</option>
-      </select>
-      <select {...register("Company size", { required: true })}>
-        <option value="Small">Small</option>
-        <option value="Startup">Startup</option>
-        <option value="Enterprise">Enterprise</option>
-      </select>
-      <input
-        type="url"
-        placeholder="Company website URL"
-        {...register("Company website URL", { required: true })}
-      />
-      <input
-        type="url"
-        placeholder="Company social media profiles"
-        {...register("Company social media profiles", { required: true })}
-      />
-      <input
-        type="text"
-        placeholder="Job title or project name"
-        {...register("Job title or project name", {})}
-      />
-      <select {...register("Job sector")}>
-        <option value="IT">IT</option>
-        <option value="Civil">Civil</option>
-        <option value="Business">Business</option>
-        <option value="C&A">C&A</option>
-      </select>
-      <textarea {...register} />
-      <textarea {...register("Required skills and expertise", {})} />
-      <select {...register("Job type")}>
-        <option value="Full-time">Full-time</option>
-        <option value="Part-time">Part-time</option>
-        <option value="Freelance">Freelance</option>
-      </select>
-      <select {...register("Job location")}>
-        <option value="Remote">Remote</option>
-        <option value="On-site">On-site</option>
-        <option value="Specific location">Specific location</option>
-      </select>
-      <Controller
-        control={control}
-        name="date-input"
-        render={({ field }) => (
-          <DatePicker
-            placeholderText="Select date"
-            onChange={(date) => field.onChange(date)}
-            selected={field.value}
-          />
-        )}
-      />
-      <input
-        type="number"
-        placeholder="Project duration (Months)"
-        {...register("Project duration (Months)", {})}
-      />
-      <input
-        type="number"
-        placeholder="Budget range (Approx.)"
-        {...register("Budget range (Approx.)", {})}
-      />
-      <input type="text" placeholder="Username" {...register("Username", {})} />
-      <input
-        type="text"
-        placeholder="Display name"
-        {...register("Display name", {})}
-      />
-      <textarea {...register("Bio or company profile summary", {})} />
-      <input
-        type="checkbox"
-        placeholder="Acceptance of terms of service and privacy policy"
-        {...register}
-      />
-      <input
-        type="checkbox"
-        placeholder="Subscription preferences for newsletters and platform updates"
-        {...register(
-          "Subscription preferences for newsletters and platform updates",
-          {}
-        )}
-      />
-      <input
-        type="checkbox"
-        placeholder="Email and notification settings"
-        {...register("Email and notification settings", {})}
-      />
-
-      <input type="submit" />
-    </form>
+    <div className="container mx-auto mt-10 text-center">
+      <h1 className="text-4xl mb-8">Registration Form</h1>
+      <div className="bg-gray-300 h-4 w-full rounded-full mb-8">
+        <div
+          className={`bg-blue-500 text-xs leading-none py-1 text-center text-white w-${
+            (step - 1) * 25
+          }/4`}
+        ></div>
+      </div>
+      {renderStep()}
+    </div>
   );
-}
+};
+
+export default Registration;

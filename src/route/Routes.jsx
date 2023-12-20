@@ -15,7 +15,7 @@ const routes = [
       { path: "/info", element: <Info /> },
       { path: "/profile", element: <Sidebar /> },
       { path: "/otp", element: <Otp /> },
-      { path: "/reg", element: <Registration /> },
+      { path: "/registration", element: <Registration /> },
     ],
   },
 ];
