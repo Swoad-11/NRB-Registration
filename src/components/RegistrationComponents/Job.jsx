@@ -6,6 +6,23 @@ import "react-datepicker/dist/react-datepicker.css";
 // eslint-disable-next-line react/prop-types
 const Job = ({ onNext }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+
+  const jobField = [
+    "Agro based Industry",
+    "Archi./Engg./Construction",
+    "Automobile/Industrial Machine",
+    "Bank/Fin. Institution",
+    "Wholesale/ Retail/ Export-Import",
+    "Electronics/Consumer Durables",
+    "Energy/Power/Fuel",
+    "Garments/Textile",
+    "Telecommunication",
+    "Pharmaceuticals",
+    "Information Technology",
+    "Logistics/Transportation",
+    "Others",
+  ];
+
   return (
     <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Content Row */}
@@ -30,6 +47,53 @@ const Job = ({ onNext }) => {
               className="border rounded-md bg-white px-3 py-2"
             />
           </div>
+          <div className="flex flex-col mb-1">
+            <label className="text-start text-sm font-bold text-gray-600 mb-1">
+              Job/Project Field
+            </label>
+            <select
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+              id="role"
+              name="role"
+            >
+              <option value="" disabled selected>
+                Select your job field
+              </option>
+              {jobField.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col mb-1">
+            <label className="text-start text-sm font-bold text-gray-600 mb-1">
+              Job/Project Description (Brief Summary)
+            </label>
+            <textarea
+              type="text"
+              id="large-input"
+              name="description"
+              autoComplete="description"
+              placeholder="Job description....."
+              required
+              className="border rounded-md bg-white px-3 py-2 h-20"
+            />
+          </div>
+          <div className="flex flex-col mb-1">
+            <label className="text-start text-sm font-bold text-gray-600 mb-1">
+              Required Skills and Expertise
+            </label>
+            <textarea
+              type="text"
+              id="large-input"
+              name="skills"
+              autoComplete="skills"
+              placeholder="Skills..."
+              required
+              className="border rounded-md bg-white px-3 py-2 h-16"
+            />
+          </div>
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
@@ -40,6 +104,9 @@ const Job = ({ onNext }) => {
                 id="role"
                 name="role"
               >
+                <option value="" disabled selected>
+                  Select your job type
+                </option>
                 <option value="full-time">Full Time</option>
                 <option value="part-time">Part Time</option>
                 <option value="freelance">Freelance</option>
@@ -54,6 +121,9 @@ const Job = ({ onNext }) => {
                 id="role"
                 name="role"
               >
+                <option value="" disabled selected>
+                  Select your job location
+                </option>
                 <option value="remote">Remote</option>
                 <option value="onsite">Onsite</option>
                 <option value="specific_location">Specific Location</option>

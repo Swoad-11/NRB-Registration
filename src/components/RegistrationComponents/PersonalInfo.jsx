@@ -1,7 +1,48 @@
+import { useState } from "react";
 import img from "../../assets/form/company.png";
+import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 const PersonalInfo = ({ onNext }) => {
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountryCode, setSelectedCountryCode] = useState("");
+  const [data, setData] = useState({ country_name: [], name_code: {} });
+
+  useEffect(() => {
+    // Fetch data from the API
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://tanvir14ahmed.space/nrb/api/user/country_code/"
+        );
+        const apiData = await response.json();
+
+        // Check if data has the 'country_name' and 'name_code' properties
+        if (apiData.country_name && apiData.name_code) {
+          setCountries(apiData.country_name);
+          setData(apiData); // Set data as a state variable
+        } else {
+          console.error("Invalid data format:", apiData);
+        }
+      } catch (error) {
+        console.error("Error fetching country data:", error);
+      }
+    };
+
+    // Call the fetch data function
+    fetchData();
+  }, []);
+
+  const handleCountryChange = (e) => {
+    const selectedCountryValue = e.target.value;
+    setSelectedCountry(selectedCountryValue);
+
+    // Set the corresponding country code
+    const countryCode = data.name_code[selectedCountryValue];
+    setSelectedCountryCode(countryCode);
+  };
+
   return (
     <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Content Row */}
@@ -48,9 +89,17 @@ const PersonalInfo = ({ onNext }) => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 id="role"
                 name="role"
+                value={selectedCountry}
+                onChange={handleCountryChange}
               >
-                <option value="client">UAE</option>
-                <option value="freelancer">Bangladesh</option>
+                <option value="" disabled>
+                  Select a country
+                </option>
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -60,15 +109,20 @@ const PersonalInfo = ({ onNext }) => {
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
                 Phone Number
               </label>
-              <input
-                type="phoneNumber"
-                name="phoneNumber"
-                id="phoneNumber"
-                autoComplete="phoneNumber"
-                placeholder="Enter your Phone Number"
-                required
-                className="border rounded-md bg-white px-3 py-2"
-              />
+              <div className="flex">
+                <div className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-md px-3 py-2">
+                  {selectedCountryCode}
+                </div>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  autoComplete="phoneNumber"
+                  placeholder="Enter your Phone Number"
+                  required
+                  className="border rounded-r-md bg-white px-3 py-2"
+                />
+              </div>
             </div>
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">

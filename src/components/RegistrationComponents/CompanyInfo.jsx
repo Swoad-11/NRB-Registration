@@ -86,6 +86,9 @@ const CompanyInfo = ({ onNext }) => {
                 id="role"
                 name="role"
               >
+                <option value="" disabled selected>
+                  Select your company sector
+                </option>
                 {industry_and_sector.map((size) => (
                   <option key={size} value={size}>
                     {size}
@@ -102,6 +105,9 @@ const CompanyInfo = ({ onNext }) => {
                 id="role"
                 name="role"
               >
+                <option value="" disabled selected>
+                  Select your company size
+                </option>
                 {companySizeOptions.map((size) => (
                   <option key={size} value={size}>
                     {size}
