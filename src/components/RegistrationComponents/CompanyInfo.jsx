@@ -1,4 +1,5 @@
 import img from "../../assets/form/job.png";
+import { FaLinkedin, FaFacebookF } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
 const CompanyInfo = ({ onNext, onPrev }) => {
@@ -120,28 +121,28 @@ const CompanyInfo = ({ onNext, onPrev }) => {
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
-                Phone Number
+                Company Contact Number
               </label>
               <input
                 type="phoneNumber"
                 name="phoneNumber"
                 id="phoneNumber"
                 autoComplete="phoneNumber"
-                placeholder="Enter your Phone Number"
+                placeholder="Enter your Company Contact Number"
                 required
                 className="border rounded-md bg-white px-3 py-2"
               />
             </div>
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
-                NID/Passport
+                Company Website URL
               </label>
               <input
-                type="NIDPassport"
-                name="NIDPassport"
-                id="NIDPassport"
-                autoComplete="NIDPassport"
-                placeholder="Enter your NID/Passport"
+                type="Company-Website-URL"
+                name="Company-Website-URL"
+                id="Company-Website-URL"
+                autoComplete="Company-Website-URL"
+                placeholder="Enter your Company Website URL"
                 required
                 className="border rounded-md bg-white px-3 py-2"
               />
@@ -149,17 +150,32 @@ const CompanyInfo = ({ onNext, onPrev }) => {
           </div>
           <div className="flex flex-col mb-1">
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
-              Address
+              Links to Company Social Media Profiles
             </label>
-            <input
-              type="address"
-              name="address"
-              id="address"
-              autoComplete="address"
-              placeholder="Enter your Address"
-              required
-              className="border rounded-md bg-white px-3 py-2"
-            />
+            <div className="grid grid-cols-2 gap-2">
+              <div className="flex">
+                <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
+                  <FaLinkedin />
+                </span>
+                <input
+                  type="text"
+                  id="website-admin"
+                  className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                  placeholder="Linkedin Link"
+                />
+              </div>
+              <div className="flex">
+                <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
+                  <FaFacebookF />
+                </span>
+                <input
+                  type="text"
+                  id="website-admin"
+                  className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
+                  placeholder="Facebook Link"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
