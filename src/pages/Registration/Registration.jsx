@@ -27,11 +27,11 @@ const Registration = () => {
   };
 
   return (
-    <div className="mx-auto mt-10 text-center">
-      <h1 className="text-4xl mb-8">Registration Form</h1>
-      <div className="bg-gray-300 h-4 w-full rounded-full mb-8">
+    <div className="mx-auto h-screen text-center bg-purple-50">
+      <h1 className="text-4xl py-6 font-bold">connect2bd</h1>
+      <div className="bg-purple-200 h-4 w-full rounded-full mb-2">
         <div
-          className={`bg-blue-500 text-xs leading-none py-1 text-center text-white w-${
+          className={`bg-purple-400 text-xs leading-none py-1 text-center text-white w-${
             (step - 1) * 25
           }/4`}
         ></div>
