@@ -117,7 +117,7 @@ const UserDataComponent = () => {
             {/* Fetch image from cPanel or any other server */}
             {userData.profile_pic ? (
               <img
-                src={`${apiUrl}/${userData.profile_pic}`} // Adjust the path as needed
+                src={`${apiUrl}${userData.profile_pic}`} // Adjust the path as needed
                 alt="Profile"
                 className="w-40 h-40 rounded object-cover mb-4"
               />
