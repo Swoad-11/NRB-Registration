@@ -3,12 +3,12 @@ import img from "../../assets/dummy.jpg";
 
 const UserDataComponent = () => {
   const [userData, setUserData] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const apiUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${apiUrl}/registration/`, {
           method: "POST",
           headers: {
@@ -32,7 +32,7 @@ const UserDataComponent = () => {
     };
 
     fetchData();
-  }, []); // The empty dependency array ensures the effect runs only once after the initial render
+  }, []);
 
   return (
     <div className="mx-auto p-4">
@@ -44,60 +44,68 @@ const UserDataComponent = () => {
               <h2 className="text-xl font-semibold">Personal Information</h2>
             </div>
 
-            <div className="mb-4 border-b">
-              <label
-                htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Full name
-              </label>
-              <span className="text-gray-700">{userData.full_name}</span>
-            </div>
             <div className="grid gap-6 mb-4 md:grid-cols-2">
               <div className="border-b">
-                <div>
-                  <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                    Sex:
-                  </span>
-                  <span className="text-gray-700">{userData.sex}</span>
-                </div>
+                <label
+                  htmlFor="first_name"
+                  className="block mb-1 text-sm font-medium text-gray-900"
+                >
+                  Full Name
+                </label>
+                <span className="text-gray-700">{userData.full_name}</span>
               </div>
 
               <div className="border-b">
-                <div>
-                  <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                    Country:
-                  </span>
-                  <span className="text-gray-700">{userData.country}</span>
-                </div>
+                <label
+                  htmlFor="first_name"
+                  className="block mb-1 text-sm font-medium text-gray-900"
+                >
+                  Sex
+                </label>
+                <span className="text-gray-700">{userData.sex}</span>
               </div>
             </div>
+
+            <div className="grid gap-6 mb-4 md:grid-cols-2">
+              <div className="border-b">
+                <label
+                  htmlFor="first_name"
+                  className="block mb-1 text-sm font-medium text-gray-900"
+                >
+                  Country
+                </label>
+                <span className="text-gray-700">{userData.country}</span>
+              </div>
+
+              <div className="border-b">
+                <label
+                  htmlFor="first_name"
+                  className="block mb-1 text-sm font-medium text-gray-900"
+                >
+                  Phone Number
+                </label>
+                <span className="text-gray-700">{userData.phone_personal}</span>
+              </div>
+            </div>
+
             <div className="mb-4 border-b">
               <label
                 htmlFor="first_name"
-                className="block text-sm font-medium text-gray-900"
+                className="block mb-1 text-sm font-medium text-gray-900"
               >
                 Address
               </label>
               <span className="text-gray-700">{userData.address}</span>
             </div>
+
             <div className="mb-4 border-b">
               <label
                 htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900"
+                className="block mb-1 text-sm font-medium text-gray-900"
               >
                 Contact Email
               </label>
               <span className="text-gray-700">{userData.contact_email}</span>
-            </div>
-            <div className="mb-4 border-b">
-              <label
-                htmlFor="first_name"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                Phone Number
-              </label>
-              <span className="text-gray-700">{userData.phone_personal}</span>
             </div>
           </div>
 
@@ -106,12 +114,20 @@ const UserDataComponent = () => {
             className="flex flex-col items-center justify-center bg-white
           shadow-md rounded"
           >
-            {/* Dummy Profile Image (replace with actual image upload) */}
-            <img
-              src={userData.profile_pic ? userData.profile_pic : img}
-              alt="Profile"
-              className="w-40 h-40 rounded object-cover mb-4"
-            />
+            {/* Fetch image from cPanel or any other server */}
+            {userData.profile_pic ? (
+              <img
+                src={`${apiUrl}${userData.profile_pic}`} // Adjust the path as needed
+                alt="Profile"
+                className="w-40 h-40 rounded object-cover mb-4"
+              />
+            ) : (
+              <img
+                src={img}
+                alt="Profile"
+                className="w-40 h-40 rounded object-cover mb-4"
+              />
+            )}
 
             {/* Add your image upload component here */}
             <input type="file" className="border border-gray-300 p-2" />
@@ -126,46 +142,62 @@ const UserDataComponent = () => {
           <div className="mb-4 pb-2 text-center">
             <h2 className="text-xl font-semibold">Company Information</h2>
           </div>
-          <div className="mb-4 border-b">
-            <label
-              htmlFor="first_name"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Company
-            </label>
-            <span className="text-gray-700">{userData.company_name}</span>
-          </div>
-          <div className="mb-4 border-b">
-            <label
-              htmlFor="first_name"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Position in company
-            </label>
-            <span className="text-gray-700">
-              {userData.position_in_company}
-            </span>
-          </div>
+
           <div className="grid gap-6 mb-4 md:grid-cols-2">
             <div className="border-b">
-              <div>
-                <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                  Industry and Sector:
-                </span>
-                <span className="text-gray-700">
-                  {userData.industry_and_sector}
-                </span>
-              </div>
+              <label
+                htmlFor="first_name"
+                className="block mb-1 text-sm font-medium text-gray-900"
+              >
+                Company Name
+              </label>
+              <span className="text-gray-700">{userData.company_name}</span>
             </div>
 
             <div className="border-b">
-              <div>
-                <span className="mb-2 text-sm font-medium text-gray-900 pr-2">
-                  Company Size:
-                </span>
-                <span className="text-gray-700">{userData.company_size}</span>
-              </div>
+              <label
+                htmlFor="first_name"
+                className="block mb-1 text-sm font-medium text-gray-900"
+              >
+                Position in company
+              </label>
+              <span className="text-gray-700">
+                {userData.position_in_company}
+              </span>
             </div>
+          </div>
+
+          <div className="grid gap-6 mb-4 md:grid-cols-2">
+            <div className="border-b">
+              <label
+                htmlFor="first_name"
+                className="block mb-1 text-sm font-medium text-gray-900"
+              >
+                Company Size
+              </label>
+              <span className="text-gray-700">{userData.company_size}</span>
+            </div>
+            <div className="border-b">
+              <label
+                htmlFor="first_name"
+                className="block mb-1 text-sm font-medium text-gray-900"
+              >
+                Industry and Sector
+              </label>
+              <span className="text-gray-700">
+                {userData.industry_and_sector}
+              </span>
+            </div>
+          </div>
+
+          <div className="mb-4 border-b">
+            <label
+              htmlFor="first_name"
+              className="block mb-2 text-sm font-medium text-gray-900"
+            >
+              Company Contact No.
+            </label>
+            <span className="text-gray-700">{userData.phone_company}</span>
           </div>
 
           <div className="mb-4 border-b">
