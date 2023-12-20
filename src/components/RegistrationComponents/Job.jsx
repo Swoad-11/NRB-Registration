@@ -1,7 +1,11 @@
+import { useState } from "react";
 import img from "../../assets/form/job.png";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 // eslint-disable-next-line react/prop-types
 const Job = ({ onNext }) => {
+  const [selectedDate, setSelectedDate] = useState(null);
   return (
     <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Content Row */}
@@ -14,14 +18,14 @@ const Job = ({ onNext }) => {
         <div className="w-full mx-auto">
           <div className="flex flex-col mb-1">
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
-              Full Name
+              Job/Project Title
             </label>
             <input
-              type="fullName"
-              name="fullName"
-              id="fullName"
-              autoComplete="fullName"
-              placeholder="Enter your Full Name"
+              type="projectTitle"
+              name="projectTitle"
+              id="projectTitle"
+              autoComplete="projectTitle"
+              placeholder="Enter your Project/Job Title"
               required
               className="border rounded-md bg-white px-3 py-2"
             />
@@ -29,28 +33,30 @@ const Job = ({ onNext }) => {
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
-                Sex
+                Job Type
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 id="role"
                 name="role"
               >
-                <option value="client">Male</option>
-                <option value="freelancer">Female</option>
+                <option value="full-time">Full Time</option>
+                <option value="part-time">Part Time</option>
+                <option value="freelance">Freelance</option>
               </select>
             </div>
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
-                Country
+                Job Location
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 id="role"
                 name="role"
               >
-                <option value="client">UAE</option>
-                <option value="freelancer">Bangladesh</option>
+                <option value="remote">Remote</option>
+                <option value="onsite">Onsite</option>
+                <option value="specific_location">Specific Location</option>
               </select>
             </div>
           </div>
@@ -58,43 +64,41 @@ const Job = ({ onNext }) => {
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
-                Phone Number
+                Job/Project Starting Date
               </label>
-              <input
-                type="phoneNumber"
-                name="phoneNumber"
-                id="phoneNumber"
-                autoComplete="phoneNumber"
-                placeholder="Enter your Phone Number"
-                required
-                className="border rounded-md bg-white px-3 py-2"
+              <DatePicker
+                className="border rounded-md bg-white px-3 py-2 w-full"
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Select a date"
               />
             </div>
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
-                NID/Passport
+                Job/Project Duration
               </label>
-              <input
-                type="NIDPassport"
-                name="NIDPassport"
-                id="NIDPassport"
-                autoComplete="NIDPassport"
-                placeholder="Enter your NID/Passport"
-                required
-                className="border rounded-md bg-white px-3 py-2"
-              />
+              <select
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                id="role"
+                name="role"
+              >
+                <option value="contractual">Contractual</option>
+                <option value="yearly">Yearly</option>
+                <option value="permanent">Permanent</option>
+              </select>
             </div>
           </div>
           <div className="flex flex-col mb-1">
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
-              Address
+              Budget Range (Approx) in USD
             </label>
             <input
               type="address"
               name="address"
               id="address"
               autoComplete="address"
-              placeholder="Enter your Address"
+              placeholder="Example: 500 USD-600 USD"
               required
               className="border rounded-md bg-white px-3 py-2"
             />
@@ -107,7 +111,7 @@ const Job = ({ onNext }) => {
         font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
           onClick={onNext}
         >
-          Next
+          Submit
         </button>
       </form>
 
