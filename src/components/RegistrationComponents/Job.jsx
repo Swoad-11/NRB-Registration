@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // eslint-disable-next-line react/prop-types
-const Job = ({ onNext }) => {
+const Job = ({ onNext, onPrev }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const jobField = [
@@ -176,13 +176,22 @@ const Job = ({ onNext }) => {
         </div>
 
         {/* Submit Button */}
-        <button
-          className="text-white bg-purple-700 hover:bg-purple-800
+        <div className="grid grid-cols-2 gap-32 max-[400px]:gap-16">
+          <button
+            className="text-white bg-purple-700 hover:bg-purple-800
+        font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
+            onClick={onPrev}
+          >
+            Previous
+          </button>
+          <button
+            className="text-white bg-purple-700 hover:bg-purple-800
         font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
-          onClick={onNext}
-        >
-          Submit
-        </button>
+            onClick={onNext}
+          >
+            Submit
+          </button>
+        </div>
       </form>
 
       {/* Image Row */}

@@ -12,16 +12,20 @@ const Registration = () => {
     setStep(step + 1);
   };
 
+  const prevPage = () => {
+    setStep(step - 1);
+  };
+
   const renderStep = () => {
     switch (step) {
       case 1:
         return <Welcome onNext={nextPage} />;
       case 2:
-        return <PersonalInfo onNext={nextPage} />;
+        return <PersonalInfo onNext={nextPage} onPrev={prevPage} />;
       case 3:
-        return <CompanyInfo onNext={nextPage} />;
+        return <CompanyInfo onNext={nextPage} onPrev={prevPage} />;
       case 4:
-        return <Job onNext={nextPage} />;
+        return <Job onNext={nextPage} onPrev={prevPage} />;
       case 5:
         return <Success />;
       default:

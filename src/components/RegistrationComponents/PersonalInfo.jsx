@@ -77,6 +77,9 @@ const PersonalInfo = ({ onNext }) => {
                 id="role"
                 name="role"
               >
+                <option value="" disabled selected>
+                  Select your sex
+                </option>
                 <option value="client">Male</option>
                 <option value="freelancer">Female</option>
               </select>
