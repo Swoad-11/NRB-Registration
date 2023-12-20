@@ -2,6 +2,32 @@ import img from "../../assets/form/job.png";
 
 // eslint-disable-next-line react/prop-types
 const CompanyInfo = ({ onNext }) => {
+  const companySizeOptions = [
+    "Self-employed",
+    "1-10 employees",
+    "11-50 employees",
+    "51-200 employees",
+    "201-500 employees",
+    "501-1000 employees",
+    "1001-5000 employees",
+  ];
+
+  const industry_and_sector = [
+    "Agro based Industry",
+    "Archi./Engg./Construction",
+    "Automobile/Industrial Machine",
+    "Bank/Fin. Institution",
+    "Wholesale/ Retail/ Export-Import",
+    "Electronics/Consumer Durables",
+    "Energy/Power/Fuel",
+    "Garments/Textile",
+    "Telecommunication",
+    "Pharmaceuticals",
+    "Information Technology",
+    "Logistics/Transportation",
+    "Others",
+  ];
+
   return (
     <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Image Row */}
@@ -18,7 +44,7 @@ const CompanyInfo = ({ onNext }) => {
 
       <form className="flex-1 mx-2">
         <h2 className="text-2xl font-semibold mb-6">
-          Give Information of your Company
+          Give Informations of your Company
         </h2>
 
         <div className="w-full mx-auto">
@@ -53,28 +79,34 @@ const CompanyInfo = ({ onNext }) => {
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
-                Sex
+                Industry and Sector
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 id="role"
                 name="role"
               >
-                <option value="client">Male</option>
-                <option value="freelancer">Female</option>
+                {industry_and_sector.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
-                Country
+                Company Size
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 id="role"
                 name="role"
               >
-                <option value="client">UAE</option>
-                <option value="freelancer">Bangladesh</option>
+                {companySizeOptions.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

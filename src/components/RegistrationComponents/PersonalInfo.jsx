@@ -8,7 +8,7 @@ const PersonalInfo = ({ onNext }) => {
 
       <form className="flex-1 mx-2">
         <h2 className="text-2xl font-semibold mb-6">
-          Give your personal information
+          Give your personal informations
         </h2>
 
         <div className="w-full mx-auto">
