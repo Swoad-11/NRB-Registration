@@ -163,6 +163,9 @@ const Sidebar = () => {
             />
             <SidebarItem itemName={"Profile"} logo={<FaUser />} />
             <Link to="/info">
+              <SidebarItem itemName={"OLD form"} logo={<FaWpforms />} />
+            </Link>
+            <Link to="/registration">
               <SidebarItem itemName={"Registration"} logo={<FaWpforms />} />
             </Link>
             <Link onClick={handleLogout} to="/">
