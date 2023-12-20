@@ -3,6 +3,7 @@ import Welcome from "../../components/RegistrationComponents/Welcome";
 import PersonalInfo from "../../components/RegistrationComponents/PersonalInfo";
 import CompanyInfo from "../../components/RegistrationComponents/CompanyInfo";
 import Success from "../../components/RegistrationComponents/Success";
+import Job from "../../components/RegistrationComponents/Job";
 
 const Registration = () => {
   const [step, setStep] = useState(1);
@@ -20,6 +21,8 @@ const Registration = () => {
       case 3:
         return <CompanyInfo onNext={nextPage} />;
       case 4:
+        return <Job onNext={nextPage} />;
+      case 5:
         return <Success />;
       default:
         return null;

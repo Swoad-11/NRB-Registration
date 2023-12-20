@@ -5,7 +5,8 @@ const PersonalInfo = ({ onNext }) => {
       <h1 className="text-3xl mb-4">Personal Information</h1>
       {/* Add your personal info form fields here */}
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="text-white bg-purple-700 hover:bg-purple-800
+        font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
         onClick={onNext}
       >
         Next
