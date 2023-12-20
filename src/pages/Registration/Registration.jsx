@@ -27,7 +27,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="container mx-auto mt-10 text-center">
+    <div className="mx-auto mt-10 text-center">
       <h1 className="text-4xl mb-8">Registration Form</h1>
       <div className="bg-gray-300 h-4 w-full rounded-full mb-8">
         <div
