@@ -61,9 +61,12 @@ const Sidebar = () => {
                 </svg>
               </button>
               <Link to="/" className="flex ms-2 md:me-24">
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">
-                  NRB
-                </span>
+                <img
+                  src="./c2b.svg"
+                  alt="c2b"
+                  className="self-center"
+                  style={{ width: "50px", height: "50px" }} // Adjust width and height as needed
+                />
               </Link>
             </div>
           </div>
@@ -79,7 +82,7 @@ const Sidebar = () => {
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-violet-300">
           <ul className="space-y-2 font-medium">
-            <Link to="https://www.freelancer.com/jobs/react-js/">
+            <Link to="https://www.ipsitasoft.com/">
               <SidebarItem itemName={"Home"} logo={<FaHome />} />
             </Link>
 
