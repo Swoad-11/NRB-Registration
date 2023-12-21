@@ -73,7 +73,7 @@ const Login = () => {
         navigate("/profile");
       } else {
         // If registration is not complete, navigate to the info page
-        navigate("/info");
+        navigate("/registration");
       }
     } catch (error) {
       console.error("Login failed:", error.message);

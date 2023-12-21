@@ -40,7 +40,7 @@ const Registration = () => {
   });
 
   const nextPage = (data) => {
-    console.log("Next Page Data:", data);
+    // console.log("Next Page Data:", data);
     setFormData((prevData) => ({ ...prevData, ...data }));
     setStep(step + 1);
   };
