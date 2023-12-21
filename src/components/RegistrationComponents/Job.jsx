@@ -177,6 +177,7 @@ const Job = ({ onNext, onPrev }) => {
         {/* Submit Button */}
         <div className="grid grid-cols-2 gap-32 max-[400px]:gap-16">
           <button
+            type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
         font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
             onClick={onPrev}
@@ -184,6 +185,7 @@ const Job = ({ onNext, onPrev }) => {
             Previous
           </button>
           <button
+            type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
         font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
             onClick={onNext}
