@@ -9,6 +9,7 @@ export default ({ mode }) => {
   // https://vitejs.dev/config/
   return defineConfig({
     plugins: [react()],
+    base: "https://tanvir14ahmed.space/",
     server: {
       port: Number(process.env.VITE_PORT),
     },
