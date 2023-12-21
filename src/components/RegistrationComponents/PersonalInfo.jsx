@@ -3,11 +3,38 @@ import img from "../../assets/form/company.png";
 import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
-const PersonalInfo = ({ onNext }) => {
+const PersonalInfo = ({ onNext, formData, setFormData }) => {
   const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCountryCode, setSelectedCountryCode] = useState("");
   const [data, setData] = useState({ country_name: [], name_code: {} });
+
+  const handleNext = () => {
+    const fullName = document.getElementById("fullName").value;
+    const sex = document.getElementById("role").value;
+    const phoneNumber = document.getElementById("phoneNumber").value;
+    const NIDPassport = document.getElementById("NIDPassport").value;
+    const address = document.getElementById("address").value;
+
+    const personalInfoData = {
+      fullName,
+      sex,
+      country: selectedCountry,
+      phoneNumber,
+      NIDPassport,
+      address,
+    };
+
+    // Merge the new data with the existing formData
+    const newFormData = { ...formData, ...personalInfoData };
+    console.log(newFormData);
+
+    // Update the state with the new formData
+    setFormData(newFormData);
+
+    // Call onNext with the updated formData
+    onNext(personalInfoData);
+  };
 
   useEffect(() => {
     // Fetch data from the API
@@ -162,7 +189,7 @@ const PersonalInfo = ({ onNext }) => {
           type="button"
           className="text-white bg-purple-700 hover:bg-purple-800
         font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
-          onClick={onNext}
+          onClick={handleNext}
         >
           Next
         </button>

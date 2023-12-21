@@ -8,11 +8,45 @@ import Job from "../../components/RegistrationComponents/Job";
 const Registration = () => {
   const [step, setStep] = useState(1);
 
-  const nextPage = () => {
+  const [formData, setFormData] = useState({
+    //personal info
+    fullName: "",
+    sex: "",
+    country: "",
+    phoneNumber: "",
+    NIDPassport: "",
+    address: "",
+    //CompanyInfo components
+    companyName: "",
+    position: "",
+    industryAndSector: "",
+    companySize: "",
+    cphoneNumber: "",
+    websiteURL: "",
+    socialMediaLinks: {
+      linkedin: "",
+      facebook: "",
+    },
+    // job-related fields
+    projectTitle: "",
+    jobField: "",
+    description: "",
+    skills: "",
+    jobType: "",
+    jobLocation: "",
+    startDate: null,
+    jobDuration: "",
+    budgetRange: "",
+  });
+
+  const nextPage = (data) => {
+    console.log("Next Page Data:", data);
+    setFormData((prevData) => ({ ...prevData, ...data }));
     setStep(step + 1);
   };
 
-  const prevPage = () => {
+  const prevPage = (data) => {
+    setFormData((prevData) => ({ ...prevData, ...data }));
     setStep(step - 1);
   };
 
@@ -21,11 +55,32 @@ const Registration = () => {
       case 1:
         return <Welcome onNext={nextPage} />;
       case 2:
-        return <PersonalInfo onNext={nextPage} onPrev={prevPage} />;
+        return (
+          <PersonalInfo
+            onNext={nextPage}
+            formData={formData}
+            setFormData={setFormData}
+            onPrev={prevPage}
+          />
+        );
       case 3:
-        return <CompanyInfo onNext={nextPage} onPrev={prevPage} />;
+        return (
+          <CompanyInfo
+            onNext={nextPage}
+            formData={formData}
+            setFormData={setFormData}
+            onPrev={prevPage}
+          />
+        );
       case 4:
-        return <Job onNext={nextPage} onPrev={prevPage} />;
+        return (
+          <Job
+            onNext={nextPage}
+            formData={formData}
+            setFormData={setFormData}
+            onPrev={prevPage}
+          />
+        );
       case 5:
         return <Success />;
       default:
