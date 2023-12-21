@@ -123,10 +123,10 @@ const CompanyInfo = ({ onNext, onPrev }) => {
                 Company Contact Number
               </label>
               <input
-                type="cphoneNumber"
-                name="cphoneNumber"
-                id="cphoneNumber"
-                autoComplete="cphoneNumber"
+                type="phoneNumber"
+                name="phoneNumber"
+                id="phoneNumber"
+                autoComplete="phoneNumber"
                 placeholder="Enter your Company Contact Number"
                 required
                 className="border rounded-md bg-white px-3 py-2"
