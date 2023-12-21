@@ -23,7 +23,7 @@ const Job = ({ onNext, onPrev }) => {
     "Others",
   ];
 
-  const handleNext = () => {
+  const handleNext = async () => {
     // Collect data from the form fields
     const job_title = document.getElementById("job_title").value;
     const job_field = document.getElementById("job_field").value;
@@ -49,8 +49,30 @@ const Job = ({ onNext, onPrev }) => {
       budget_range,
     };
 
-    // Call onNext with the jobData
-    onNext(jobData);
+    // API endpoint and token
+    const apiUrl = import.meta.env.VITE_API_URL + "/registration_job/";
+    const token = localStorage.getItem("token");
+
+    try {
+      // Make the API call
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(jobData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Continue to the next step
+      onNext(jobData);
+    } catch (error) {
+      console.error("Error during API call:", error);
+    }
   };
 
   return (
