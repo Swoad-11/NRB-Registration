@@ -156,7 +156,9 @@ const Signup = () => {
             onChange={handleChange}
           >
             <option value="client">Client</option>
-            <option value="freelancer">Freelancer</option>
+            <option value="freelancer" disabled>
+              Freelancer
+            </option>
           </select>
         </div>
 
