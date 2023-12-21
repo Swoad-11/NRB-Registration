@@ -44,10 +44,10 @@ const PersonalInfo = ({ onNext }) => {
   };
 
   return (
-    <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
+    <div className="flex mt-6 items-center max-[950px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Content Row */}
 
-      <form className="flex-1 mx-2">
+      <form className="flex-1 mx-2 w-full max-[950px]:mb-4">
         <h2 className="text-2xl font-semibold mb-6">
           Give your personal informations
         </h2>
@@ -106,7 +106,6 @@ const PersonalInfo = ({ onNext }) => {
               </select>
             </div>
           </div>
-          <div className="flex flex-col mb-1"></div>
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
@@ -123,7 +122,7 @@ const PersonalInfo = ({ onNext }) => {
                   autoComplete="phoneNumber"
                   placeholder="Enter your Phone Number"
                   required
-                  className="border rounded-r-md bg-white px-3 py-2"
+                  className="border rounded-r-md bg-white block w-full p-2.5"
                 />
               </div>
             </div>
@@ -138,7 +137,7 @@ const PersonalInfo = ({ onNext }) => {
                 autoComplete="NIDPassport"
                 placeholder="Enter your NID/Passport"
                 required
-                className="border rounded-md bg-white px-3 py-2"
+                className="border rounded-md bg-white block w-full p-2.5"
               />
             </div>
           </div>
@@ -169,7 +168,7 @@ const PersonalInfo = ({ onNext }) => {
       </form>
 
       {/* Image Row */}
-      <div className="flex-1">
+      <div className="flex-1 max-[950px]:mb-4">
         <img
           src={img}
           alt="Welcome Image"

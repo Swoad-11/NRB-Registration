@@ -30,9 +30,9 @@ const CompanyInfo = ({ onNext, onPrev }) => {
   ];
 
   return (
-    <div className="flex mt-6 items-center max-[800px]:flex-col max-[910px]:px-4 bg-purple-50">
+    <div className="flex mt-6 items-center max-[950px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Image Row */}
-      <div className="flex-1">
+      <div className="flex-1 max-[950px]:mb-4">
         <img
           src={img}
           alt="Welcome Image"
@@ -43,7 +43,7 @@ const CompanyInfo = ({ onNext, onPrev }) => {
 
       {/* Content Row */}
 
-      <form className="flex-1 mx-2">
+      <form className="flex-1 mx-2 w-full max-[950px]:mb-4">
         <h2 className="text-2xl font-semibold mb-6">
           Give Informations of your Company
         </h2>
@@ -117,7 +117,6 @@ const CompanyInfo = ({ onNext, onPrev }) => {
               </select>
             </div>
           </div>
-          <div className="flex flex-col mb-1"></div>
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
