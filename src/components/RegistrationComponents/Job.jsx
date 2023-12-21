@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // eslint-disable-next-line react/prop-types
-const Job = ({ onNext, onPrev }) => {
+const Job = ({ onNext, formData, onPrev, setFormData }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const job_field = [
@@ -49,6 +49,43 @@ const Job = ({ onNext, onPrev }) => {
       budget_range,
     };
 
+    // Extract values from the event object
+
+    // Merge the new data with the existing formData
+    const newFormData = { ...formData, ...jobData };
+    console.log(newFormData);
+
+    const postData = {
+      full_name: newFormData.full_name,
+      sex: newFormData.sex,
+      country: newFormData.country,
+      phone_personal: newFormData.phone_personal,
+      contact_email: newFormData.contact_email,
+      nid_passport: newFormData.nid_passport,
+      address: newFormData.address,
+      company_name: newFormData.company_name,
+      position_in_company: newFormData.position_in_company,
+      industry_and_sector: newFormData.industry_and_sector,
+      company_size: newFormData.company_size,
+      phone_company: newFormData.phone_company,
+      company_website_url: newFormData.company_website_url,
+      social_media_profiles: newFormData.social_media_profiles,
+      job_title: newFormData.job_title,
+      job_field: newFormData.job_field,
+      job_description: newFormData.job_description,
+      required_skills_expertise: newFormData.required_skills_expertise,
+      job_type: newFormData.job_type,
+      job_location: newFormData.job_location,
+      // job_start_date: selectedDate.newFormData.job_start_date,
+      job_duration: newFormData.job_duration,
+      budget_range: newFormData.budget_range,
+    };
+
+    console.log("gojamil:", postData);
+
+    // Update the state with the new formData
+    setFormData(postData);
+
     // API endpoint and token
     const apiUrl = import.meta.env.VITE_API_URL + "/registration_job/";
     const token = localStorage.getItem("token");
@@ -61,7 +98,7 @@ const Job = ({ onNext, onPrev }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(jobData),
+        body: JSON.stringify(postData),
       });
 
       if (!response.ok) {
