@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import img from "../../assets/form/job.png";
-import { FaLinkedin, FaFacebookF } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
 
 const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
   const handleNext = () => {
@@ -17,8 +17,9 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
     const company_website_url = document.getElementById(
       "company_website_url"
     ).value;
-    const linkedinLink = document.getElementById("linkedinLink").value;
-    const facebookLink = document.getElementById("facebookLink").value;
+    const social_media_profiles = document.getElementById(
+      "social_media_profiles"
+    ).value;
 
     // Create an object with the company info data
     const companyInfoData = {
@@ -28,10 +29,7 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
       company_size,
       phone_company,
       company_website_url,
-      social_media_profiles: {
-        linkedin: linkedinLink,
-        facebook: facebookLink,
-      },
+      social_media_profiles,
     };
 
     // Merge the new data with the existing formData
@@ -200,12 +198,12 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
                 </span>
                 <input
                   type="text"
-                  id="linkedinLink"
+                  id="social_media_profiles"
                   className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
                   placeholder="Linkedin Link"
                 />
               </div>
-              <div className="flex">
+              {/* <div className="flex">
                 <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md">
                   <FaFacebookF />
                 </span>
@@ -215,7 +213,7 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
                   className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
                   placeholder="Facebook Link"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
