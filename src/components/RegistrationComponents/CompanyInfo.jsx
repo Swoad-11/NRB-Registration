@@ -72,23 +72,26 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
   ];
 
   useEffect(() => {
-    // Fetch the designation data when the component mounts
-    const apiUrl = "https://tanvir14ahmed.space/nrb/api/user/designations/";
+    // Fetch data from the API
+    const fetchData = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/designations/`);
+        const apiData = await response.json();
 
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        // Check if data has the 'designations' property
+        if (apiData.designations) {
+          setFetchedDesignations(apiData.designations);
+        } else {
+          console.error("Invalid data format:", apiData);
         }
-        return response.json(); // Parse the response body as JSON
-      })
-      .then((data) => {
-        // Store the fetched data in state
-        setFetchedDesignations(data.designations);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+      } catch (error) {
+        console.error("Error fetching designation data:", error);
+      }
+    };
+
+    // Call the fetch data function
+    fetchData();
   }, []);
 
   return (
@@ -131,8 +134,8 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-              id="designation"
-              name="designation"
+              id="position_in_company"
+              name="position_in_company"
             >
               <option value="" disabled selected>
                 Select a designation
