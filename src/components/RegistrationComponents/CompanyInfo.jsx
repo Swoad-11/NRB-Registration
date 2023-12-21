@@ -1,9 +1,51 @@
+/* eslint-disable react/prop-types */
 import img from "../../assets/form/job.png";
 import { FaLinkedin, FaFacebookF } from "react-icons/fa";
 
-// eslint-disable-next-line react/prop-types
-const CompanyInfo = ({ onNext, onPrev }) => {
-  const companySizeOptions = [
+const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
+  const handleNext = () => {
+    // Collect data from the form fields
+    const company_name = document.getElementById("company_name").value;
+    const position_in_company = document.getElementById(
+      "position_in_company"
+    ).value;
+    const industry_and_sector = document.getElementById(
+      "industry_and_sector"
+    ).value;
+    const company_size = document.getElementById("company_size").value;
+    const phone_company = document.getElementById("phone_company").value;
+    const company_website_url = document.getElementById(
+      "company_website_url"
+    ).value;
+    const linkedinLink = document.getElementById("linkedinLink").value;
+    const facebookLink = document.getElementById("facebookLink").value;
+
+    // Create an object with the company info data
+    const companyInfoData = {
+      company_name,
+      position_in_company,
+      industry_and_sector,
+      company_size,
+      phone_company,
+      company_website_url,
+      social_media_profiles: {
+        linkedin: linkedinLink,
+        facebook: facebookLink,
+      },
+    };
+
+    // Merge the new data with the existing formData
+    const newFormData = { ...formData, ...companyInfoData };
+    console.log(newFormData);
+
+    // Update the state with the new formData
+    setFormData(newFormData);
+
+    // Call onNext with the updated formData
+    onNext(companyInfoData);
+  };
+
+  const company_sizeOptions = [
     "Self-employed",
     "1-10 employees",
     "11-50 employees",
@@ -45,7 +87,7 @@ const CompanyInfo = ({ onNext, onPrev }) => {
 
       <form className="flex-1 mx-2 w-full max-[950px]:mb-4">
         <h2 className="text-2xl font-semibold mb-6">
-          Give Informations of your Company
+          Give Information of your Company
         </h2>
 
         <div className="w-full mx-auto">
@@ -54,10 +96,10 @@ const CompanyInfo = ({ onNext, onPrev }) => {
               Company Name
             </label>
             <input
-              type="companyName"
-              name="companyName"
-              id="companyName"
-              autoComplete="companyName"
+              type="text"
+              name="company_name"
+              id="company_name"
+              autoComplete="company_name"
               placeholder="Enter your Company Name"
               required
               className="border rounded-md bg-white px-3 py-2"
@@ -68,11 +110,11 @@ const CompanyInfo = ({ onNext, onPrev }) => {
               Position in the Company
             </label>
             <input
-              type="position"
-              name="position"
-              id="position"
-              autoComplete="position"
-              placeholder="Enter your Position in the Company"
+              type="text"
+              name="position_in_company"
+              id="position_in_company"
+              autoComplete="position_in_company"
+              placeholder="Enter your position in the Company"
               required
               className="border rounded-md bg-white px-3 py-2"
             />
@@ -84,8 +126,8 @@ const CompanyInfo = ({ onNext, onPrev }) => {
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="industry_and_sector"
+                name="industry_and_sector"
               >
                 <option value="" disabled selected>
                   Select your company sector
@@ -103,13 +145,13 @@ const CompanyInfo = ({ onNext, onPrev }) => {
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="company_size"
+                name="company_size"
               >
                 <option value="" disabled selected>
                   Select your company size
                 </option>
-                {companySizeOptions.map((size) => (
+                {company_sizeOptions.map((size) => (
                   <option key={size} value={size}>
                     {size}
                   </option>
@@ -123,10 +165,10 @@ const CompanyInfo = ({ onNext, onPrev }) => {
                 Company Contact Number
               </label>
               <input
-                type="phoneNumber"
-                name="phoneNumber"
-                id="phoneNumber"
-                autoComplete="phoneNumber"
+                type="text"
+                name="phone_company"
+                id="phone_company"
+                autoComplete="phone_company"
                 placeholder="Enter your Company Contact Number"
                 required
                 className="border rounded-md bg-white px-3 py-2"
@@ -137,10 +179,10 @@ const CompanyInfo = ({ onNext, onPrev }) => {
                 Company Website URL
               </label>
               <input
-                type="Company-Website-URL"
-                name="Company-Website-URL"
-                id="Company-Website-URL"
-                autoComplete="Company-Website-URL"
+                type="text"
+                name="company_website_url"
+                id="company_website_url"
+                autoComplete="company_website_url"
                 placeholder="Enter your Company Website URL"
                 required
                 className="border rounded-md bg-white px-3 py-2"
@@ -158,7 +200,7 @@ const CompanyInfo = ({ onNext, onPrev }) => {
                 </span>
                 <input
                   type="text"
-                  id="website-admin"
+                  id="linkedinLink"
                   className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
                   placeholder="Linkedin Link"
                 />
@@ -169,7 +211,7 @@ const CompanyInfo = ({ onNext, onPrev }) => {
                 </span>
                 <input
                   type="text"
-                  id="website-admin"
+                  id="facebookLink"
                   className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5"
                   placeholder="Facebook Link"
                 />
@@ -183,7 +225,7 @@ const CompanyInfo = ({ onNext, onPrev }) => {
           <button
             type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
-        font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
+              font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
             onClick={onPrev}
           >
             Previous
@@ -191,8 +233,8 @@ const CompanyInfo = ({ onNext, onPrev }) => {
           <button
             type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
-        font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
-            onClick={onNext}
+              font-medium rounded-lg text-sm w-[75px] py-2.5 mt-4 mb-2"
+            onClick={handleNext}
           >
             Next
           </button>
