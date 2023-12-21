@@ -9,6 +9,7 @@ const UserDataComponent = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
+        const apiUrl = import.meta.env.VITE_API_URL;
         const response = await fetch(`${apiUrl}/registration/`, {
           method: "POST",
           headers: {

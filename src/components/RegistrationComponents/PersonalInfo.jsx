@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import img from "../../assets/form/company.png";
-import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 const PersonalInfo = ({ onNext, formData, setFormData }) => {
@@ -10,18 +9,20 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
   const [data, setData] = useState({ country_name: [], name_code: {} });
 
   const handleNext = () => {
-    const fullName = document.getElementById("fullName").value;
+    const full_name = document.getElementById("full_name").value;
     const sex = document.getElementById("role").value;
-    const phoneNumber = document.getElementById("phoneNumber").value;
-    const NIDPassport = document.getElementById("NIDPassport").value;
+    const phone_personal = document.getElementById("phone_personal").value;
+    const contact_email = document.getElementById("contact_email").value;
+    const nid_passport = document.getElementById("nid_passport").value;
     const address = document.getElementById("address").value;
 
     const personalInfoData = {
-      fullName,
+      full_name,
       sex,
       country: selectedCountry,
-      phoneNumber,
-      NIDPassport,
+      phone_personal,
+      contact_email,
+      nid_passport,
       address,
     };
 
@@ -40,9 +41,8 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://tanvir14ahmed.space/nrb/api/user/country_code/"
-        );
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await fetch(`${apiUrl}/country_code/`);
         const apiData = await response.json();
 
         // Check if data has the 'country_name' and 'name_code' properties
@@ -80,21 +80,21 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
         </h2>
 
         <div className="w-full mx-auto">
-          <div className="flex flex-col mb-1">
-            <label className="text-start text-sm font-bold text-gray-600 mb-1">
-              Full Name
-            </label>
-            <input
-              type="fullName"
-              name="fullName"
-              id="fullName"
-              autoComplete="fullName"
-              placeholder="Enter your Full Name"
-              required
-              className="border rounded-md bg-white px-3 py-2"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-2 mb-1">
+          <div className="grid grid-cols-3 gap-2 mb-1">
+            <div className="col-span-2 flex flex-col mb-1">
+              <label className="text-start text-sm font-bold text-gray-600 mb-1">
+                Full Name
+              </label>
+              <input
+                type="text"
+                name="full_name"
+                id="full_name"
+                autoComplete="full_name"
+                placeholder="Enter your Full Name"
+                required
+                className="border rounded-md bg-white px-3 py-2"
+              />
+            </div>
             <div>
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
                 Sex
@@ -107,18 +107,22 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
                 <option value="" disabled selected>
                   Select your sex
                 </option>
-                <option value="client">Male</option>
-                <option value="freelancer">Female</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
               </select>
             </div>
-            <div>
+          </div>
+
+          <div className="grid grid-cols-5 gap-2 mb-1">
+            <div className="col-span-2 flex flex-col mb-1">
               <label className="text-start block text-sm font-bold text-gray-600 mb-1">
                 Country
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="country"
+                name="country"
                 value={selectedCountry}
                 onChange={handleCountryChange}
               >
@@ -132,9 +136,7 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
                 ))}
               </select>
             </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2 mb-1">
-            <div className="flex flex-col mb-1">
+            <div className="col-span-3 flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
                 Phone Number
               </label>
@@ -143,37 +145,55 @@ const PersonalInfo = ({ onNext, formData, setFormData }) => {
                   {selectedCountryCode}
                 </div>
                 <input
-                  type="text"
-                  name="phoneNumber"
-                  id="phoneNumber"
-                  autoComplete="phoneNumber"
+                  type="tel"
+                  name="phone_personal"
+                  id="phone_personal"
+                  autoComplete="phone_personal"
                   placeholder="Enter your Phone Number"
                   required
-                  className="border rounded-r-md bg-white block w-full p-2.5"
+                  className="border rounded-r-md bg-white block w-full p-2"
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-1">
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 mb-1">
+            <div className="col-span-1 flex flex-col mb-1">
+              <label className="text-start text-sm font-bold text-gray-600 mb-1">
+                Contact Email
+              </label>
+              <input
+                type="email"
+                name="contact_email"
+                id="contact_email"
+                autoComplete="contact_email"
+                placeholder="Enter your email"
+                required
+                className="border rounded-md bg-white block w-full p-2.5"
+              />
+            </div>
+            <div className="col-span-1 flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
                 NID/Passport
               </label>
               <input
-                type="NIDPassport"
-                name="NIDPassport"
-                id="NIDPassport"
-                autoComplete="NIDPassport"
+                type="text"
+                name="nid_passport"
+                id="nid_passport"
+                autoComplete="nid_passport"
                 placeholder="Enter your NID/Passport"
                 required
                 className="border rounded-md bg-white block w-full p-2.5"
               />
             </div>
           </div>
+
           <div className="flex flex-col mb-1">
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
               Address
             </label>
             <input
-              type="address"
+              type="text"
               name="address"
               id="address"
               autoComplete="address"
