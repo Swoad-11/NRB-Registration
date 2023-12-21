@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import img from "../../assets/form/job.png";
 import { FaLinkedin } from "react-icons/fa";
 
 const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
+  const [fetchedDesignations, setFetchedDesignations] = useState([]);
   const handleNext = () => {
     // Collect data from the form fields
     const company_name = document.getElementById("company_name").value;
@@ -69,6 +71,26 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
     "Others",
   ];
 
+  useEffect(() => {
+    // Fetch the designation data when the component mounts
+    const apiUrl = "https://tanvir14ahmed.space/nrb/api/user/designations/";
+
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Parse the response body as JSON
+      })
+      .then((data) => {
+        // Store the fetched data in state
+        setFetchedDesignations(data.designations);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div className="flex mt-6 items-center max-[950px]:flex-col max-[910px]:px-4 bg-purple-50">
       {/* Image Row */}
@@ -107,15 +129,20 @@ const CompanyInfo = ({ onNext, onPrev, formData, setFormData }) => {
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
               Position in the Company
             </label>
-            <input
-              type="text"
-              name="position_in_company"
-              id="position_in_company"
-              autoComplete="position_in_company"
-              placeholder="Enter your position in the Company"
-              required
-              className="border rounded-md bg-white px-3 py-2"
-            />
+            <select
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+              id="designation"
+              name="designation"
+            >
+              <option value="" disabled selected>
+                Select a designation
+              </option>
+              {fetchedDesignations.map((designation, index) => (
+                <option key={index} value={designation}>
+                  {designation}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="grid grid-cols-2 gap-2 mb-1">
             <div>
