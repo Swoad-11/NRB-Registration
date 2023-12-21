@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const Job = ({ onNext, onPrev }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const jobField = [
+  const job_field = [
     "Agro based Industry",
     "Archi./Engg./Construction",
     "Automobile/Industrial Machine",
@@ -22,6 +22,36 @@ const Job = ({ onNext, onPrev }) => {
     "Logistics/Transportation",
     "Others",
   ];
+
+  const handleNext = () => {
+    // Collect data from the form fields
+    const job_title = document.getElementById("job_title").value;
+    const job_field = document.getElementById("job_field").value;
+    const job_description = document.getElementById("job_description").value;
+    const required_skills_expertise = document.getElementById(
+      "required_skills_expertise"
+    ).value;
+    const job_type = document.getElementById("job_type").value;
+    const job_location = document.getElementById("job_location").value;
+    const job_duration = document.getElementById("job_duration").value;
+    const budget_range = document.getElementById("budget_range").value;
+
+    // Create an object with the job/project data
+    const jobData = {
+      job_title,
+      job_field,
+      job_description,
+      required_skills_expertise,
+      job_type,
+      job_location,
+      job_start_date: selectedDate,
+      job_duration,
+      budget_range,
+    };
+
+    // Call onNext with the jobData
+    onNext(jobData);
+  };
 
   return (
     <div className="flex mt-6 items-center max-[950px]:flex-col max-[910px]:px-4 bg-purple-50">
@@ -38,10 +68,10 @@ const Job = ({ onNext, onPrev }) => {
               Job/Project Title
             </label>
             <input
-              type="projectTitle"
-              name="projectTitle"
-              id="projectTitle"
-              autoComplete="projectTitle"
+              type="job_title"
+              name="job_title"
+              id="job_title"
+              autoComplete="job_title"
               placeholder="Enter your Project/Job Title"
               required
               className="border rounded-md bg-white px-3 py-2"
@@ -53,13 +83,13 @@ const Job = ({ onNext, onPrev }) => {
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-              id="role"
-              name="role"
+              id="job_field"
+              name="job_field"
             >
               <option value="" disabled selected>
                 Select your job field
               </option>
-              {jobField.map((size) => (
+              {job_field.map((size) => (
                 <option key={size} value={size}>
                   {size}
                 </option>
@@ -68,13 +98,13 @@ const Job = ({ onNext, onPrev }) => {
           </div>
           <div className="flex flex-col mb-1">
             <label className="text-start text-sm font-bold text-gray-600 mb-1">
-              Job/Project Description (Brief Summary)
+              Job/Project description (Brief Summary)
             </label>
             <textarea
               type="text"
-              id="large-input"
-              name="description"
-              autoComplete="description"
+              id="job_description"
+              name="job_description"
+              autoComplete="job_description"
               placeholder="Job description....."
               required
               className="border rounded-md bg-white px-3 py-2 h-20"
@@ -86,10 +116,10 @@ const Job = ({ onNext, onPrev }) => {
             </label>
             <textarea
               type="text"
-              id="large-input"
-              name="skills"
-              autoComplete="skills"
-              placeholder="Skills..."
+              id="required_skills_expertise"
+              name="required_skills_expertise"
+              autoComplete="required_skills_expertise"
+              placeholder="required_skills_expertise..."
               required
               className="border rounded-md bg-white px-3 py-2 h-16"
             />
@@ -101,8 +131,8 @@ const Job = ({ onNext, onPrev }) => {
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="job_type"
+                name="job_type"
               >
                 <option value="" disabled selected>
                   Select your job type
@@ -118,8 +148,8 @@ const Job = ({ onNext, onPrev }) => {
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="job_location"
+                name="job_location"
               >
                 <option value="" disabled selected>
                   Select your job location
@@ -145,12 +175,12 @@ const Job = ({ onNext, onPrev }) => {
             </div>
             <div className="flex flex-col mb-1">
               <label className="text-start text-sm font-bold text-gray-600 mb-1">
-                Job/Project Duration
+                Job/Project duration
               </label>
               <select
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                id="role"
-                name="role"
+                id="job_duration"
+                name="job_duration"
               >
                 <option value="contractual">Contractual</option>
                 <option value="yearly">Yearly</option>
@@ -163,10 +193,10 @@ const Job = ({ onNext, onPrev }) => {
               Budget Range (Approx) in USD
             </label>
             <input
-              type="address"
-              name="address"
-              id="address"
-              autoComplete="address"
+              type="text"
+              name="budget_range"
+              id="budget_range"
+              autoComplete="budget_range"
               placeholder="Example: 500 USD-600 USD"
               required
               className="border rounded-md bg-white px-3 py-2"
@@ -188,13 +218,12 @@ const Job = ({ onNext, onPrev }) => {
             type="button"
             className="text-white bg-purple-700 hover:bg-purple-800
         font-medium rounded-lg text-sm px-5 py-2.5 mt-4 mb-2"
-            onClick={onNext}
+            onClick={handleNext}
           >
             Submit
           </button>
         </div>
       </form>
-
       {/* Image Row */}
       <div className="flex-1 max-[950px]:mb-4">
         <img

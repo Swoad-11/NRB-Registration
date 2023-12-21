@@ -10,33 +10,33 @@ const Registration = () => {
 
   const [formData, setFormData] = useState({
     //personal info
-    fullName: "",
+    full_name: "",
     sex: "",
     country: "",
-    phoneNumber: "",
-    NIDPassport: "",
+    phone_personal: "",
+    contact_email: "",
+    nid_passport: "",
     address: "",
+
     //CompanyInfo components
-    companyName: "",
-    position: "",
-    industryAndSector: "",
-    companySize: "",
-    cphoneNumber: "",
-    websiteURL: "",
-    socialMediaLinks: {
-      linkedin: "",
-      facebook: "",
-    },
+    company_name: "",
+    position_in_company: "",
+    industry_and_sector: "",
+    company_size: "",
+    phone_company: "",
+    company_website_url: "",
+    social_media_profiles: "",
+
     // job-related fields
-    projectTitle: "",
-    jobField: "",
-    description: "",
-    skills: "",
-    jobType: "",
-    jobLocation: "",
-    startDate: null,
-    jobDuration: "",
-    budgetRange: "",
+    job_title: "",
+    job_field: "",
+    job_description: "",
+    required_skills_expertise: "",
+    job_type: "",
+    job_location: "",
+    job_start_date: null,
+    job_duration: "",
+    budget_range: "",
   });
 
   const nextPage = (data) => {
