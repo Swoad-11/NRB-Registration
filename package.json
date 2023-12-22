@@ -1,8 +1,8 @@
 {
   "name": "nrb-registration",
-  "homepage": "https://tanvir14ahmed.space/c2b/",
+  "homepage": "https://tanvir14ahmed.space/",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
