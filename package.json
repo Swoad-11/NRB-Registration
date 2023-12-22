@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.0",
     "@quillforms/react-renderer-utils": "^5.9.1",
     "@quillforms/renderer-core": "^5.7.0",
+    "@samkirkland/ftp-deploy": "^1.2.3",
     "formik": "^2.4.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
