@@ -1,6 +1,6 @@
 {
   "name": "nrb-registration",
-  "homepage": "../../C2B",
+  "homepage": "./",
   "private": true,
   "version": "1.0.3",
   "type": "module",
