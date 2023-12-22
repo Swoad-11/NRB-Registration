@@ -2,27 +2,27 @@ on:
   push:
     branches:
       - main
-name: 🚀 Deploy website on push
+name: 🚀 Push Pipeline
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Deployed!!
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v3
+      - name: 🚚 Applying Latest Commit
+        uses: actions/checkout@v4.1.1
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v2
+      - name: Using Node.js v20.9.0
+        uses: actions/setup-node@v4.0.1
         with:
-          node-version: "20"
+          node-version: "20.9.0"
 
-      - name: 🔨 Build Project
+      - name: 🔨 Building...
         run: |
           npm i
           npx vite build
 
-      - name: 📂 Sync files
+      - name: 📂 Syncing files...
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.tanvir14ahmed.space
