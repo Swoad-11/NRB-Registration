@@ -3,14 +3,16 @@ import img from "../../assets/dummy.jpg";
 
 const UserDataComponent = () => {
   const [userData, setUserData] = useState(null);
+  const [jobData, setJobData] = useState(null);
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const apiUrl = import.meta.env.VITE_API_URL;
-        const response = await fetch(`${apiUrl}/registration/`, {
+
+        // Fetch user data
+        const userResponse = await fetch(`${apiUrl}/registration/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -18,15 +20,34 @@ const UserDataComponent = () => {
           },
         });
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+        if (!userResponse.ok) {
+          throw new Error("Network response for user data was not ok");
         }
 
-        const data = await response.json();
-        setUserData(data.response);
+        const userData = await userResponse.json();
+        setUserData(userData.response);
 
-        // Log the response data
-        console.log("Response Data:", data.response);
+        // Log the user data
+        console.log("User Data:", userData.response);
+
+        // Fetch job data
+        const jobResponse = await fetch(`${apiUrl}/jobs/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!jobResponse.ok) {
+          throw new Error("Network response for job data was not ok");
+        }
+
+        const jobData = await jobResponse.json();
+        setJobData(jobData);
+
+        // Log the job data
+        console.log("Job Data:", jobData);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -227,6 +248,94 @@ const UserDataComponent = () => {
               </a>
             </span>
           </div>
+        </div>
+      )}
+
+      {/* Job Information Section */}
+      {jobData && (
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div className="mb-4 pb-2 text-center">
+            <h2 className="text-xl font-semibold">Job Information</h2>
+          </div>
+
+          {/* Render all jobs in the jobData array */}
+          {jobData.map((job) => (
+            <div key={job.id} className="mb-4 border-b">
+              <label
+                htmlFor="job_title"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Title
+              </label>
+              <span className="text-gray-700">{job.job_title}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Description
+              </label>
+              <span className="text-gray-700">{job.job_description}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Required Skills
+              </label>
+              <span className="text-gray-700">
+                {job.required_skills_expertise}
+              </span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Field
+              </label>
+              <span className="text-gray-700">{job.job_field}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Type
+              </label>
+              <span className="text-gray-700">{job.job_type}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Location
+              </label>
+              <span className="text-gray-700">{job.job_location}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Starting Date
+              </label>
+              <span className="text-gray-700">{job.job_start_date}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Job Duration
+              </label>
+              <span className="text-gray-700">{job.job_duration}</span>
+
+              <label
+                htmlFor="job_description"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Budget Range
+              </label>
+              <span className="text-gray-700">{job.budget_range}</span>
+            </div>
+          ))}
         </div>
       )}
     </div>
